@@ -1,7 +1,6 @@
 package org.java.hrm.domain;
 
 import java.io.Serializable;
-
 public class Dept implements Serializable {
     private Integer id;
     private String name;
@@ -9,6 +8,11 @@ public class Dept implements Serializable {
 
     public Dept() {
         super();
+    }
+
+    @Override
+    public String toString() {
+        return this.id + "---" + this.name + "---" + this.remark;
     }
 
     public Integer getId() {

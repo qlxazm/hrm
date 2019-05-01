@@ -22,6 +22,11 @@ public class Document implements Serializable {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return this.id + "---" + this.title + "---" + this.fileName + "---" + this.remark + "---" + this.createDate + "---" + this.user;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
