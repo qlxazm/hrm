@@ -16,13 +16,19 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
          http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <mybatis:scan base-package="org.java.hrm.mapper"/>
+    <!--mybatis:scan会扫描org.java.hrm.dao包里面的所有接口当作spring的bean配置，之后可以进行依赖注入-->
+    <mybatis:scan base-package="org.java.hrm.dao"/>
+
     <context:component-scan base-package="org.java.hrm"/>
+
     <context:property-override location="classpath:db.properties"/>
+
     <!--配置c3p0数据源-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" />
+
     <!--整个mybatis和spring-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"/>
+
     <!--JDBC事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/>
     <!--启用支持annotation注解方式事务管理-->
