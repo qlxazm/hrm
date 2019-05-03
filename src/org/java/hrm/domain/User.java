@@ -15,6 +15,11 @@ public class User implements Serializable {
         super();
     }
 
+    @Override
+    public String toString() {
+        return this.id + "---" + this.username + "---" + this.loginname + "---" + this.userstatus + "---" + this.createdate;
+    }
+
     public Integer getId() {
         return id;
     }

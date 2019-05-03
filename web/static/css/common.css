@@ -1,0 +1,17 @@
+/*中心布局*/
+.center_X{/*水平中心布局*/
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.center_Y{/*垂直中心布局*/
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.center_XY{/*水平垂直中心布局*/
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

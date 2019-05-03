@@ -5,7 +5,7 @@ import org.java.hrm.util.common.HrmConstants;
 public class PageModel {
     private int recordCount; //总记录数
     private int pageIndex;   //当前页码
-    private int pageSize = HrmConstants.PAGE_DEFAULT_SIZE = 4;
+    private int pageSize = HrmConstants.PAGE_DEFAULT_SIZE;
     private int totalSize;   //总页数
 
     public int getRecordCount() {
@@ -24,7 +24,7 @@ public class PageModel {
     }
 
     public void setPageIndex(int pageIndex) {
-        this.pageIndex = pageIndex;
+        this.pageIndex = pageIndex >= 0 ? pageIndex : 0;
     }
 
     public int getTotalSize() {

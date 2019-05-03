@@ -1,0 +1,4 @@
+.field{margin-bottom: 20px;}
+.input{display: inline-block;border: 1px solid transparent;}
+.input > input{padding: 3px 8px;}
+.label{font-size: 1.5em;font-weight: 600;}

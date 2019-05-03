@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: qlxazm
@@ -9,22 +10,26 @@
 <html>
 <head>
     <title>登录界面</title>
+    <link rel="stylesheet" href="/static/css/neat.css"/>
+    <link rel="stylesheet" href="/static/css/common.css"/>
+    <link rel="stylesheet" href="/static/css/loginForm.css"/>
 </head>
 <body>
-<table>
-    <form action="login" method="post">
-        <tr>
-            <th><label>用户名</label></th>
-            <th><input type="text" name="loginname"/></th>
-        </tr>
-        <tr>
-            <th><label>密码</label></th>
-            <th><input type="password" name="password"></th>
-        </tr>
-        <tr>
-            <th><input type="submit" value="登录"/></th>
-        </tr>
-    </form>
-</table>
+    <div class="input_form center_XY">
+        <form action="login" method="post">
+            <div class="field">
+                <span class="label">用户名：</span>
+                <div class="input"><input type="text" name="loginname"/></div>
+            </div>
+            <div class="field">
+                <span class="label">密&nbsp;&nbsp;&nbsp;码：</span>
+                <div class="input"><input type="password" name="password"></div>
+            </div>
+            <div class="field">
+                <span class="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <div class="input login"><input type="submit" value="登录"/></div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

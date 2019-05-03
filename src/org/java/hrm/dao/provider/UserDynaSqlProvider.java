@@ -18,10 +18,10 @@ public class UserDynaSqlProvider {
                 if (params.get("user") != null){
                     User user = (User)params.get("user");
                     if (user.getUsername() != null && !user.getUsername().equals("")) {
-                        WHERE(" username LIKE CONCAT('%', #{user.username, '%'}) ");
+                        WHERE(" username LIKE CONCAT('%', #{user.username}, '%') ");
                     }
                     if (user.getUserstatus() != null && !user.getUserstatus().equals("")) {
-                        WHERE(" userstatus LIKE CONCAT('%',#{user.userstatus},'%') ");
+                        WHERE(" userstatus LIKE CONCAT('%', #{user.userstatus}, '%') ");
                     }
                 }
             }
@@ -30,19 +30,19 @@ public class UserDynaSqlProvider {
         if (params.get("pageModel") != null) {
             sql += " LIMIT #{pageModel.firstLimitParam}, #{pageModel.pageSize} ";
         }
-
+        System.out.println("动态sql语句之用户分页查询：" + sql);
         return sql;
     }
 
     public String count(Map<String, Object> params){
-        return new SQL(){
+        String sql = new SQL(){
             {
                 SELECT("count(*)");
                 FROM(USERTABLE);
                 if (params.get("user") != null){
                     User user = (User)params.get("user");
                     if (user.getUsername() != null && !user.getUsername().equals("")) {
-                        WHERE(" username LIKE CONCAT('%', #{user.username, '%'}) ");
+                        WHERE(" username LIKE CONCAT('%', #{user.username}, '%') ");
                     }
                     if (user.getUserstatus() != null && !user.getUserstatus().equals("")) {
                         WHERE(" userstatus LIKE CONCAT('%',#{user.userstatus},'%') ");
@@ -50,6 +50,7 @@ public class UserDynaSqlProvider {
                 }
             }
         }.toString();
-
+        System.out.println("动态sql语句之查询符合条件的用户总数：" + sql);
+        return sql;
     }
 }

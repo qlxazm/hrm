@@ -3,14 +3,19 @@ package org.java.hrm.controller;
 import org.java.hrm.domain.User;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.common.HrmConstants;
+import org.java.hrm.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -43,8 +48,40 @@ public class UserController {
         return mv;
     }
 
+    /**
+     * 这里使用ModelAttribute注解的属性。前台控件的值会自动传入到user对应的属性中。
+     * @param pageIndex
+     * @param user
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/user/selectUser")
+    public String selectUser(Integer pageIndex,
+                             @ModelAttribute User user,
+                             Model model) {
+        System.out.println("用户管理之用户查询请求 -- >> " + user);
+        PageModel pageModel = new PageModel();
+        if (pageIndex != null) {
+            pageModel.setPageIndex(pageIndex);
+        }
+        /** 查询用户的信息 */
+        List<User> users = hrmService.findUser(user, pageModel);
+        model.addAttribute("pageModel", pageModel);
+        model.addAttribute("users", users);
+        /** 设置前台显示的页面 */
+        model.addAttribute("page", "user/user.jsp");
+        return "main";
+    }
 
-    //@RequestMapping(value = "/user/selectUser")
+    @RequestMapping(value = "/user/addUser")
+    public String addUser(@ModelAttribute User user, Model model){
+        System.out.println("/user/addUser -- >> " + user);
+        if (user != null){
+            System.out.println("这里去添加用户。。。。");
+        }
+        model.addAttribute("page", "user/addUser.jsp");
+        return "main";
+    }
 
     @RequestMapping(value = "/loginForm")
     public ModelAndView loginForm(ModelAndView mv) {
@@ -56,6 +93,7 @@ public class UserController {
     @RequestMapping(value = "/main")
     public ModelAndView main(ModelAndView mv) {
         mv.setViewName("/main");
+        mv.addObject("page", "default.jsp");
         return mv;
     }
 
