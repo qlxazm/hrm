@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+   <taglib xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+     http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+    <description>这里放的是对自定义标签的描述信息</description>
+    <display-name>Page core</display-name>
+    <tlib-version>1.0</tlib-version>
+    <!--标签前缀-->
+    <short-name>page</short-name>
+    <!--jsp页面中引用时所使用的地址-->
+    <uri>/pager-tags</uri>
+
+    <tag>
+        <!--标签名称-->
+        <name>pagination</name>
+        <!--标签处理的类-->
+        <tag-class>org.java.hrm.util.tag.PagerTag</tag-class>
+        <!--标签体为空-->
+        <body-content>empty</body-content>
+
+        <!--下面开始定义标签体的一系列属性-->
+
+        <attribute>
+            <name>pageIndex</name>
+            <required>true</required>
+            <!-- 设置为true时,表示支持EL表达式 -->
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>pageSize</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>recordCount</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+
+        <attribute>
+            <name>submitUrl</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

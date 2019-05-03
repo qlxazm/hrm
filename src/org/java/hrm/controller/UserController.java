@@ -19,6 +19,14 @@ public class UserController {
     @Qualifier("hrmService")
     private HrmService hrmService;
 
+    /**
+     * 用户登录
+     * @param loginname
+     * @param password
+     * @param session
+     * @param mv
+     * @return
+     */
     @RequestMapping(value = "/login")
     public ModelAndView login(@RequestParam("loginname") String loginname,
                               @RequestParam("password") String password,
@@ -34,6 +42,9 @@ public class UserController {
         }
         return mv;
     }
+
+
+    //@RequestMapping(value = "/user/selectUser")
 
     @RequestMapping(value = "/loginForm")
     public ModelAndView loginForm(ModelAndView mv) {
