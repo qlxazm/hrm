@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.jws.soap.SOAPBinding;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -23,6 +24,24 @@ public class UserController {
     @Autowired
     @Qualifier("hrmService")
     private HrmService hrmService;
+
+    /**
+     * 批量删除用户
+     * @param ids
+     * @param mv
+     * @return
+     */
+    @RequestMapping(value = "/user/removeUser")
+    public ModelAndView removeUser(String ids, ModelAndView mv){
+        System.out.println("介绍到的参数：" + ids);
+        String[] idArray = ids.split(",");
+        for (String id : idArray) {
+            /** 根据id删除用户 */
+            hrmService.removeUserById(Integer.parseInt(id));
+        }
+        mv.setViewName("redirect:/user/selectUser");
+        return  mv;
+    }
 
     /**
      * 用户登录
@@ -45,6 +64,20 @@ public class UserController {
             mv.addObject("message", "用户名或者密码错误！");
             mv.setViewName("forward:/loginForm");
         }
+        return mv;
+    }
+
+    /**
+     * 登出系统
+     * @param request
+     * @param mv
+     * @return
+     */
+    @RequestMapping(value = "/logout")
+    public ModelAndView logout(ModelAndView mv, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.removeAttribute(HrmConstants.USER_SESSION);
+        mv.setViewName("redirect:/loginForm");
         return mv;
     }
 

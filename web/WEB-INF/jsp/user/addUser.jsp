@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>添加用户</title>
+    <link rel="stylesheet" href="/static/css/addUser.css"/>
 </head>
 <body>
     <form method="post" action="addUser?flag=2">

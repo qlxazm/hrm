@@ -75,7 +75,7 @@
                         <fmt:formatDate type="both" value="${user.createdate}" dateStyle="medium" timeStyle="medium"/>
                     </th>
                     <th>
-                        <a class="delete" href="/user/deleteUser?id=${user.id}">删除</a>
+                        <a class="delete" href="/user/removeUser?ids=${user.id}">删除</a>
                         <a class="update" href="/user/updateUser?id=${user.id}">修改</a>
                     </th>
                 </tr>
@@ -89,6 +89,10 @@
                      pageIndex="${pageModel.pageIndex}"
                     submitUrl="/user/selectUser?pageIndex={0}"
     />
+    <form method="post" action="/user/removeUser" style="display: none;">
+        <input type="text" class="delete_ids" name="ids"/>
+        <input type="submit" class="delete_user_btn">
+    </form>
 </body>
 <script>
     $(function(){
@@ -96,6 +100,9 @@
         var allCheckbox = $("input[name='category']"); //每条记录的选择框
         var selectCheckboxItems = Object.create(null); //选中的选择框
         var batchDelete = $('.batchDelete');           //批量删除
+        var deleteIdsInput = $('.delete_ids');
+        var deleteUserBtn = $('.delete_user_btn');     //隐藏的删除按钮
+        var deleteUser = $('.delete');                 //删除单行用户
 
 
         selectAllCheckbox.change(function(event){
@@ -126,6 +133,9 @@
                 }
             }
             deleteIds = deleteIds.join(',');
+            deleteIdsInput.val(deleteIds);
+            /** 提交要删除的id **/
+            deleteUserBtn.click();
         });
 
     });

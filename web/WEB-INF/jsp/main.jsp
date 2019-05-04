@@ -14,6 +14,7 @@
 <body>
     <div class="header">
         <h3>当前用户是：[${sessionScope[HrmConstants.USER_SESSION].username}]</h3>
+        <a href="/logout" style="font-size: 1.4em">注销</a>
     </div>
     <div>
         <div class="sideBar">
