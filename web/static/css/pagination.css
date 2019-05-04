@@ -1,0 +1,4 @@
+.pagination > span, .pagination > a{display: inline-block;padding: 2px 5px;background-color: #F4F4F5;box-sizing: border-box; margin-right: 5px;color: #606266; border-radius: 2px; min-width: 22px;text-align: center; font-weight: 700}
+.pagination > a:hover{color: #409EFF}
+.pagination .current{background-color: #409EFF; color: #ffffff;}
+.pagination .disabled{color: #C0C8D7}

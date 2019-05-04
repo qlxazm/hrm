@@ -23,6 +23,22 @@ public class HrmServiceImpl implements HrmService {
     @Autowired
     private UserDao userDao;  //自动注入UserDao
 
+    /**
+     * 添加新用户
+     * @param user
+     * @return
+     */
+    @Override
+    public void addUser(User user) {
+        userDao.save(user);
+    }
+
+    /**
+     * 分页查询用户
+     * @param user
+     * @param pageModel
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public List<User> findUser(User user, PageModel pageModel) {
@@ -38,6 +54,12 @@ public class HrmServiceImpl implements HrmService {
         return userDao.selectByPage(params);
     }
 
+    /**
+     * 登录
+     * @param loginname
+     * @param password
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public User login(String loginname, String password) {
@@ -45,6 +67,11 @@ public class HrmServiceImpl implements HrmService {
         return userDao.selectByLoginnameAndPassword(loginname, password);
     }
 
+    /**
+     * 根据id查询用户信息
+     * @param id
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public User findUserById(Integer id) {

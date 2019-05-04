@@ -1,0 +1,8 @@
+.header{height: 80px; margin-bottom: 10px;}
+.content{box-sizing: border-box; padding: 5px 20px;margin-left: 20px;display: inline-block;width: calc(100% - 140px);}
+.sideBar{box-sizing: border-box; font-size: 1.3em; font-weight: 600;display: inline-block;float: left;margin-left: 10px;min-height: calc(100% - 100px)}
+.sideBar ul li{box-sizing: border-box; padding: 0 10px;min-width: 100px;text-align: center;border-bottom: 1px solid #AAAAAA;}
+.sideBar ul li:last-child{border: none}
+.sideBar ul li:hover{background-color: #666666; border: transparent;}
+.sideBar ul li:hover a{color: #FFFFFF;}
+.sideBar, .content{border: 1px solid #CFCFCF; border-radius: 2px;}

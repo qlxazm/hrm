@@ -30,4 +30,11 @@ public interface HrmService {
      * @return
      */
     List<User> findUser(User user, PageModel pageModel);
+
+    /**
+     * 添加新的用户
+     * @param user
+     * @return
+     */
+    void addUser(User user);
 }

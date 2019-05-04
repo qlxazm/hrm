@@ -1,8 +1,6 @@
 package org.java.hrm.dao;
 import com.sun.corba.se.spi.ior.ObjectKey;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import org.java.hrm.dao.provider.UserDynaSqlProvider;
 import org.java.hrm.domain.User;
 
@@ -46,4 +44,13 @@ public interface UserDao {
      */
     @SelectProvider(type = UserDynaSqlProvider.class, method = "count")
     int count(Map<String, Object> params);
+
+    /**
+     * 插入新的用户
+     * @param user
+     * @return
+     */
+    @InsertProvider(type = UserDynaSqlProvider.class, method = "insertUser")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    void save(User user);
 }

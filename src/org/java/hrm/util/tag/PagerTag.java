@@ -23,7 +23,7 @@ public class PagerTag extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
         StringBuilder res = new StringBuilder();
         StringBuilder str = new StringBuilder();
-
+        str.append("<div class='pagination'>");
         if (this.recordCount > 0){
             this.totalPage = (this.recordCount - 1) / this.pageSize + 1;
 
@@ -49,7 +49,7 @@ public class PagerTag extends SimpleTagSupport {
                 temp = this.submitUrl.replace(TAG, String.valueOf(this.pageIndex + 1));
                 str.append("<a href='" + temp + "'>下一页</a>");
             }
-
+            str.append("</div>");
             /** 暂时先输出没样式的分页 */
             this.getJspContext().getOut().print(str.toString());
         }

@@ -11,51 +11,58 @@
 <html>
 <head>
     <title>用户列表页面</title>
+    <link rel="stylesheet" href="/static/css/user.css"/>
+    <link rel="stylesheet" href="/static/css/pagination.css"/>
 </head>
 <body>
-    <h2>这是用户列表页面</h2>
-    <table>
+    <h2>用户列表</h2>
+
+    <%--工具栏--%>
+    <div class="tool_bar">
         <form method="post" action="/user/selectUser">
-            <tr>
-                <th><label>登录名：</label></th>
-                <th><input type="text" name="loginname"/></th>
-            </tr>
-            <tr>
-                <th><label>用户状态：</label></th>
-                <th><input type="text" name="userstatus"/></th>
-            </tr>
-            <tr>
-                <th><label>用户名：</label></th>
-                <th><input type="text" name="username"/></th>
-            </tr>
-            <tr>
-                <th><input type="submit" value="查询"/></th>
-            </tr>
+            <div class="field">
+                <span class="label">登录名：</span>
+                <div class="input"><input type="text" name="loginname"/></div>
+            </div>
+            <div class="field">
+                <span class="label">用户状态：</span>
+                <div class="input"><input type="text" name="userstatus"/></div>
+            </div>
+            <div class="field">
+                <span class="label">用户名：</span>
+                <div class="input"><input type="text" name="username"/></div>
+            </div>
+            <div class="field btn">
+                <span class="label"><input type="submit" value="查询"/></span>
+                <div class="input"><input type="reset" value="重置"/></div>
+            </div>
         </form>
-    </table>
+    </div>
 
-    <p>当前页码：${pageModel.pageIndex}</p>
-    <p>当前记录数：${pageModel.recordCount}</p>
-    <p>当前分页大小：${pageModel.pageSize}</p>
-    <p>当前总页数： ${pageModel.totalSize}</p>
-    <p>从哪里开始： ${pageModel.firstLimitParam}</p>
-
-    <table border="1">
-        <tr>
-            <th>用户名</th>
-            <th>登录名</th>
-            <th>用户状态</th>
-            <th>创建时间</th>
-        </tr>
-        <c:forEach items="${users}" var="user">
+    <%--内容栏--%>
+    <div class="data_list">
+        <table border="1">
             <tr>
-                <th>${user.username}</th>
-                <th>${user.loginname}</th>
-                <th>${user.userstatus}</th>
-                <th>${user.createdate}</th>
+                <th>用户名</th>
+                <th>登录名</th>
+                <th>用户状态</th>
+                <th>创建时间</th>
+                <th>操作</th>
             </tr>
-        </c:forEach>
-    </table>
+            <c:forEach items="${users}" var="user">
+                <tr>
+                    <th>${user.username}</th>
+                    <th>${user.loginname}</th>
+                    <th>${user.userstatus}</th>
+                    <th>${user.createdate}</th>
+                    <th>
+                        <a class="delete" href="/user/deleteUser?id=${user.id}">删除</a>
+                        <a class="update" href="/user/updateUser?id=${user.id}">修改</a>
+                    </th>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 
     <page:pagination pageSize="${pageModel.pageSize}"
                      recordCount="${pageModel.recordCount}"

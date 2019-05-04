@@ -53,4 +53,24 @@ public class UserDynaSqlProvider {
         System.out.println("动态sql语句之查询符合条件的用户总数：" + sql);
         return sql;
     }
+
+    public String insertUser(User user) {
+        String sql = new SQL(){
+            {
+                INSERT_INTO(USERTABLE);
+                if (user.getUsername() != null && !user.getUsername().equals("")){
+                    VALUES("username", "#{username}");
+                }
+                if (user.getLoginname() != null && !user.getLoginname().equals("")){
+                    VALUES("loginname", "#{loginname}");
+                }
+                if (user.getUserstatus() != null && !user.getLoginname().equals("")) {
+                    VALUES("userstatus", "#{userstatus}");
+                }
+                if (user.getPassword() != null && !user.getPassword().equals("")) {
+                    VALUES("password", "#{password}");
+                }            }
+        }.toString();
+        return sql;
+    }
 }

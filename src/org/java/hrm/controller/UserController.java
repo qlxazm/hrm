@@ -73,14 +73,26 @@ public class UserController {
         return "main";
     }
 
+    /**
+     * 添加用户
+     * @param flag   flag=1 只是跳转到添加用户界面  flag=2 添加用户
+     * @param user
+     * @param mv
+     * @return
+     */
     @RequestMapping(value = "/user/addUser")
-    public String addUser(@ModelAttribute User user, Model model){
+    public ModelAndView addUser(String flag, @ModelAttribute User user, ModelAndView mv){
         System.out.println("/user/addUser -- >> " + user);
-        if (user != null){
-            System.out.println("这里去添加用户。。。。");
+        if (flag.equals("1")){
+            mv.addObject("page", "user/addUser.jsp");
+        }else {
+            hrmService.addUser(user);
+            String message = user.getId() != null && user.getId() > 0 ? "添加用户成功！" : "添加用户失败！";
+            mv.addObject("message", message);
+            mv.addObject("page", "user/addUser.jsp");
         }
-        model.addAttribute("page", "user/addUser.jsp");
-        return "main";
+        mv.setViewName("main");
+        return mv;
     }
 
     @RequestMapping(value = "/loginForm")

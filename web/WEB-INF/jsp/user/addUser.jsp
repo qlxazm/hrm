@@ -11,7 +11,8 @@
     <title>添加用户</title>
 </head>
 <body>
-    <form method="post" action="user/addUser">
+    <form method="post" action="addUser?flag=2">
+        <p class="message">${message}</p>
         <div class="field">
             <span class="label">用户名：</span>
             <div class="input"><input type="text" name="username"></div>
