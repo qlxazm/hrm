@@ -24,6 +24,24 @@ public class HrmServiceImpl implements HrmService {
     private UserDao userDao;  //自动注入UserDao
 
     /**
+     * 根据id删除用户
+     * @param id
+     */
+    @Override
+    public void removeUserById(Integer id) {
+        userDao.deleteById(id);
+    }
+
+    /**
+     * 修改用户
+     * @param user
+     */
+    @Override
+    public void modifyUser(User user) {
+        userDao.update(user);
+    }
+
+    /**
      * 添加新用户
      * @param user
      * @return

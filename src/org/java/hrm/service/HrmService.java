@@ -13,7 +13,7 @@ public interface HrmService {
      * @param password
      * @return
      */
-    User login(String loginname, String password);
+    public User login(String loginname, String password);
 
 
     /**
@@ -21,7 +21,7 @@ public interface HrmService {
      * @param id
      * @return
      */
-    User findUserById(Integer id);
+    public User findUserById(Integer id);
 
     /**
      * 根据条件获取用户
@@ -29,12 +29,24 @@ public interface HrmService {
      * @param pageModel
      * @return
      */
-    List<User> findUser(User user, PageModel pageModel);
+    public List<User> findUser(User user, PageModel pageModel);
 
     /**
      * 添加新的用户
      * @param user
      * @return
      */
-    void addUser(User user);
+    public void addUser(User user);
+
+    /**
+     * 根据id删除用户
+     * @param id
+     */
+    public void removeUserById(Integer id);
+
+    /**
+     * 更新用户
+     * @param user
+     */
+    public void modifyUser(User user);
 }

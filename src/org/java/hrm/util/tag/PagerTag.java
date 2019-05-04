@@ -23,10 +23,13 @@ public class PagerTag extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
         StringBuilder res = new StringBuilder();
         StringBuilder str = new StringBuilder();
-        str.append("<div class='pagination'>");
-        if (this.recordCount > 0){
-            this.totalPage = (this.recordCount - 1) / this.pageSize + 1;
+        this.totalPage = (this.recordCount - 1) / this.pageSize + 1;
 
+        str.append("<div class='pagination'>");
+
+        /** 添加总的计数提示 */
+        str.append("<span>共 " + this.totalPage + "页/" + this.recordCount + "条</span>");
+        if (this.recordCount > 0){
             if (this.pageIndex == 1){// 如果当前页是第一页
                 str.append("<span class='disabled'>上一页</span>");
                 /** 计算中间的标签 */
@@ -49,7 +52,18 @@ public class PagerTag extends SimpleTagSupport {
                 temp = this.submitUrl.replace(TAG, String.valueOf(this.pageIndex + 1));
                 str.append("<a href='" + temp + "'>下一页</a>");
             }
+
+            /** 添加到跳转 */
+            String tempUrl = this.submitUrl.substring(0, this.submitUrl.indexOf("?"));
+            str.append("<form style='display:inline-block' method='get' action='" + tempUrl + "'>");
+            str.append("<span>转到</span>");
+            str.append("<input class='jump_num' type='text' name='pageIndex'/>");
+            str.append("<input class='jump' style='padding: 0 5px' type='submit' value='跳转'/>");
+            str.append("</form>");
+
+
             str.append("</div>");
+
             /** 暂时先输出没样式的分页 */
             this.getJspContext().getOut().print(str.toString());
         }

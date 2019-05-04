@@ -53,4 +53,18 @@ public interface UserDao {
     @InsertProvider(type = UserDynaSqlProvider.class, method = "insertUser")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     void save(User user);
+
+    /**
+     * 根据用户id删除用户
+     * @param id
+     */
+    @Delete("DELETE FROM " + USERTABLE + " WHERE id = #{id}")
+    void deleteById(@Param("id") Integer id);
+
+    /**
+     * 更新用户
+     * @param user
+     */
+    @UpdateProvider(type = UserDynaSqlProvider.class, method = "updateUser")
+    void update(User user);
 }

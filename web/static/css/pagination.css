@@ -2,3 +2,5 @@
 .pagination > a:hover{color: #409EFF}
 .pagination .current{background-color: #409EFF; color: #ffffff;}
 .pagination .disabled{color: #C0C8D7}
+/*跳转页码输入框*/
+.pagination form input.jump_num{margin:0 10px 0 5px; padding: 0 5px;width: 30px;}

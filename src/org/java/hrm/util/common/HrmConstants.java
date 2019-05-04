@@ -14,5 +14,5 @@ public class HrmConstants {
     //用户的session对象
     public static final String USER_SESSION = "user_session";
     //默认的分页大小
-    public static int  PAGE_DEFAULT_SIZE = 1;
+    public static int  PAGE_DEFAULT_SIZE = 15;
 }

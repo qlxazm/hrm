@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/static/css/neat.css"/>
     <link rel="stylesheet" href="/static/css/common.css"/>
     <link rel="stylesheet" href="/static/css/main.css"/>
+    <link rel="stylesheet" href="/static/css/pagination.css"/>
+    <script src="/static/js/jquery.js"></script>
 </head>
 <body>
     <div class="header">

@@ -73,4 +73,26 @@ public class UserDynaSqlProvider {
         }.toString();
         return sql;
     }
+
+    public String updateUser(User user) {
+        String sql = new SQL(){
+            {
+                UPDATE(USERTABLE);
+                if (user.getUsername() != null) {
+                    SET(" username = #{username} ");
+                }
+                if (user.getLoginname() != null) {
+                    SET(" loginname = #{loginname} ");
+                }
+                if (user.getPassword() != null) {
+                    SET(" password = #{password} ");
+                }
+                if (user.getUserstatus() != null) {
+                    SET(" userstatus = #{userstatus} ");
+                }
+                WHERE("id = #{id}");
+            }
+        }.toString();
+        return sql;
+    }
 }
