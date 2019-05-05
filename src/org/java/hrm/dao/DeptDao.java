@@ -1,8 +1,6 @@
 package org.java.hrm.dao;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import org.java.hrm.dao.provider.DeptDynaSqlProvider;
 import org.java.hrm.domain.Dept;
 
@@ -18,6 +16,15 @@ public interface DeptDao {
      * @return
      */
     @SelectProvider(type = DeptDynaSqlProvider.class, method = "selectWithParam")
+    @Results({
+            @Result(id = true, column = "id", property = "id"),
+            @Result(column = "name", property = "name"),
+            @Result(column = "remark", property = "remark"),
+            @Result(column = "id", property = "employeeNum",
+            one=@One(
+                    select = "org.java.hrm.dao.EmployeeDao.countByDeptNum"
+            ))
+    })
     List<Dept> selectByPage(Map<String, Object> params);
 
     /**
@@ -28,6 +35,10 @@ public interface DeptDao {
     @SelectProvider(type = DeptDynaSqlProvider.class, method = "count")
     int count(Map<String, Object> params);
 
+    /**
+     * 根据id删除部门
+     * @param id
+     */
     @Delete("DELETE FROM " + DEPTTABLE + " WHERE id = #{id}")
     void deleteById(@Param("id") Integer id);
 }

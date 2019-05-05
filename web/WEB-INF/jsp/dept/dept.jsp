@@ -46,12 +46,24 @@
             <c:set value="1" var="index"/>
             <c:forEach items="${depts}" var="dept">
                 <tr>
-                    <th><input type="checkbox" name="category" data-id="${dept.id}"/></th>
+                    <th>
+                        <c:if test="${dept.employeeNum > 0}">
+                            <input type="checkbox" disabled name="category" data-id="${dept.id}"/>
+                        </c:if>
+                        <c:if test="${dept.employeeNum == 0}">
+                            <input type="checkbox" name="category" data-id="${dept.id}"/>
+                        </c:if>
+                    </th>
                     <th>${index}</th>
                     <th>${dept.name}</th>
                     <th>${dept.remark}</th>
                     <th>
-                        <a class="delete" href="/dept/removeDept?ids=${dept.id}">删除</a>
+                        <c:if test="${dept.employeeNum > 0}">
+                            <a class="undelete" href="#">不可删除</a>
+                        </c:if>
+                        <c:if test="${dept.employeeNum == 0}">
+                            <a class="delete" href="/dept/removeDept?ids=${dept.id}">删除</a>
+                        </c:if>
                         <a class="update" href="?id=${dept.id}&flag=1">修改</a>
                     </th>
                 </tr>

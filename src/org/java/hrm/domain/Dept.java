@@ -5,9 +5,18 @@ public class Dept implements Serializable {
     private Integer id;
     private String name;
     private String remark;
+    private int employeeNum; // 当前部门下员工的数量
 
     public Dept() {
         super();
+    }
+
+    public int getEmployeeNum() {
+        return employeeNum;
+    }
+
+    public void setEmployeeNum(int employeeNum) {
+        this.employeeNum = employeeNum;
     }
 
     @Override

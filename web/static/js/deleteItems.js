@@ -14,6 +14,9 @@ $(function(){
             selectCheckboxItems = Object.create(null);
         }
         for (var i = 0, len = allCheckbox.length; i < len; i++){
+            if (allCheckbox[i].disabled){
+                continue;
+            }
             var id = $(allCheckbox[i]).attr('data-id');
             allCheckbox[i].checked = ischecked;
             selectCheckboxItems[id] = ischecked;
@@ -37,6 +40,9 @@ $(function(){
             if (selectCheckboxItems[key]) {
                 deleteIds.push(key);
             }
+        }
+        if (!deleteIds.length){
+            return;
         }
         deleteIds = deleteIds.join(',');
         deleteIdsInput.val(deleteIds);
