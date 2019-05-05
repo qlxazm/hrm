@@ -1,5 +1,6 @@
 package org.java.hrm.dao.provider;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.jdbc.SQL;
 import org.java.hrm.domain.Dept;
 
@@ -49,6 +50,47 @@ public class DeptDynaSqlProvider {
                         WHERE(" name LIKE CONCAT('%',#{dept.name},'%') ");
                     }
                 }
+            }
+        }.toString();
+        return sql;
+    }
+
+    /**
+     * 插入部门
+     * @param dept
+     * @return
+     */
+    public String insertDept(Dept dept){
+        String sql = new SQL(){
+            {
+                INSERT_INTO(DEPTTABLE);
+                if (dept.getName() != null && !dept.getName().equals("")) {
+                    VALUES("name", "#{name}");
+                }
+                if (dept.getRemark() != null && !dept.getRemark().equals("")) {
+                    VALUES("remark", "#{remark}");
+                }
+            }
+        }.toString();
+        return sql;
+    }
+
+    /**
+     * 更新dept
+     * @param dept
+     * @return
+     */
+    public String updateDept(Dept dept) {
+        String sql = new SQL(){
+            {
+                UPDATE(DEPTTABLE);
+                if (dept.getName() != null) {
+                    SET(" name = #{name} ");
+                }
+                if (dept.getRemark() != null) {
+                    SET(" remark = #{remark} ");
+                }
+                WHERE(" id = #{id} ");
             }
         }.toString();
         return sql;

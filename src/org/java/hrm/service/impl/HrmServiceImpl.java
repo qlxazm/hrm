@@ -134,4 +134,32 @@ public class HrmServiceImpl implements HrmService {
     public void removeDeptById(Integer id) {
         deptDao.deleteById(id);
     }
+
+    /**
+     * 插入部门
+     * @param dept
+     */
+    @Override
+    public void addDept(Dept dept) {
+        deptDao.save(dept);
+    }
+
+    /**
+     * 更新dept
+     * @param dept
+     */
+    @Override
+    public void modifyDept(Dept dept) {
+        deptDao.update(dept);
+    }
+
+    /**
+     * 根据id查询出dept信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Dept findDeptById(Integer id) {
+        return deptDao.selectById(id);
+    }
 }

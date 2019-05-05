@@ -64,7 +64,7 @@
                         <c:if test="${dept.employeeNum == 0}">
                             <a class="delete" href="/dept/removeDept?ids=${dept.id}">删除</a>
                         </c:if>
-                        <a class="update" href="?id=${dept.id}&flag=1">修改</a>
+                        <a class="update" href="/dept/updateDept?id=${dept.id}&flag=1">修改</a>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>

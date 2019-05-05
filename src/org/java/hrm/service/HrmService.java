@@ -72,4 +72,23 @@ public interface HrmService {
      */
     public void removeDeptById(Integer id);
 
+    /**
+     * 插入部门
+     * @param dept
+     */
+    public void addDept(Dept dept);
+
+    /**
+     * 跟新dept
+     * @param dept
+     */
+    public void modifyDept(Dept dept);
+
+    /**
+     * 根据id查询出dept信息
+     * @param id
+     * @return
+     */
+    public Dept findDeptById(Integer id);
+
 }

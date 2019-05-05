@@ -41,4 +41,27 @@ public interface DeptDao {
      */
     @Delete("DELETE FROM " + DEPTTABLE + " WHERE id = #{id}")
     void deleteById(@Param("id") Integer id);
+
+    /**
+     * 插入新部门
+     * @param dept
+     */
+    @InsertProvider(type = DeptDynaSqlProvider.class, method = "insertDept")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    void save(Dept dept);
+
+    /**
+     * 更新dept
+     * @param dept
+     */
+    @UpdateProvider(type = DeptDynaSqlProvider.class, method = "updateDept")
+    void update(Dept dept);
+
+    /**
+     * 根据id查询出dept信息
+     * @param id
+     * @return
+     */
+    @Select("SELECT * FROM " + DEPTTABLE + " WHERE id=#{id}")
+    Dept selectById(@Param("id") Integer id);
 }

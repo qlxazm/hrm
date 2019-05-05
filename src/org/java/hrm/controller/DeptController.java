@@ -61,4 +61,46 @@ public class DeptController {
         mv.setViewName("redirect:/dept/selectDept");
         return mv;
     }
+
+    /**
+     * 添加dept
+     * @param flag flag = "1" 只是跳转到添加页面  flag = "2" 真正的添加
+     * @param dept
+     * @param mv
+     * @return
+     */
+    @RequestMapping(value = "/dept/addDept")
+    public ModelAndView addDept(String flag,
+                                @ModelAttribute Dept dept,
+                                ModelAndView mv) {
+        System.out.println("添加dept -- >> " + dept);
+        if (flag != null && flag.equals("2")){
+            /** 真正的添加dept */
+            hrmService.addDept(dept);
+            String message = dept.getId() != null && dept.getId() > 0 ? "添加成功！" : "添加失败！";
+            mv.addObject("message", message);
+        }
+
+        mv.addObject("page", "dept/addDept.jsp");
+        mv.setViewName("/main");
+        return mv;
+    }
+
+    @RequestMapping(value = "/dept/updateDept")
+    public ModelAndView updateDept(String flag,
+                                   @ModelAttribute Dept dept,
+                                   ModelAndView mv){
+        if (flag.equals("1")){
+            /** 只是跳转到更新页面 */
+            dept = hrmService.findDeptById(dept.getId());
+        }else{
+            /** 进行更新 */
+            hrmService.modifyDept(dept);
+            mv.addObject("message", "更新成功！");
+        }
+        mv.addObject("dept", dept);
+        mv.addObject("page", "dept/updateDept.jsp");
+        mv.setViewName("/main");
+        return mv;
+    }
 }

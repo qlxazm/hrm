@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>更新用户信息</title>
-    <link rel="stylesheet" href="/static/css/addUser.css"/>
+    <link rel="stylesheet" href="/static/css/addOrUpdateCommon.css"/>
 </head>
 <body>
 <form method="post" action="updateUser?flag=2">
