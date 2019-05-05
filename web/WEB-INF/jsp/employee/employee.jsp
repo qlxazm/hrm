@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="page" uri="/pager-tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 
 <html>
 <head>
@@ -16,6 +17,7 @@
 </head>
 <body>
     <h3>员工列表</h3>
+    <%-- 工具栏 --%>
     <div class="tool_bar">
         <form method="post" action="/employee/selectEmployee">
             <div class="field">
@@ -48,6 +50,12 @@
             </div>
         </form>
     </div>
+    <div class="tool_bar">
+        <div class="field">
+            <div class="input"><button class="batchDelete">批量删除</button></div>
+        </div>
+    </div>
+    <%-- 展示的数据 --%>
     <div class="data_list">
         <table border="1">
             <tr>
@@ -102,7 +110,10 @@
                     <th>${employee.email}</th>
                     <th>${employee.sex}</th>
                     <th>${employee.party}</th>
-                    <th>${employee.birthday}</th>
+                    <th>
+                            ${employee.birthday}
+                       <%-- <fmt:formatDate type="both" value="${employee.birthday}" dateStyle="medium" timeStyle="medium"/>--%>
+                    </th>
                     <th>${employee.race}</th>
                     <th>${employee.education}</th>
                     <th>${employee.speciality}</th>
@@ -124,6 +135,10 @@
                      pageIndex="${pageModel.pageIndex}"
                      submitUrl="/employee/selectEmployee?pageIndex={0}"
     />
+    <form method="post" action="/employee/removeEmployee" style="display: none;">
+        <input type="text" class="delete_ids" name="ids"/>
+        <input type="submit" class="delete_btn">
+    </form>
 </body>
 <script src="/static/js/deleteItems.js"></script>
 </html>

@@ -1,8 +1,6 @@
 package org.java.hrm.dao;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
 import org.java.hrm.dao.provider.EmployeeDynaSqlProvider;
 import org.java.hrm.domain.Employee;
 
@@ -36,4 +34,20 @@ public interface EmployeeDao {
      */
     @SelectProvider(type = EmployeeDynaSqlProvider.class, method = "count")
     public int count(Map<String, Object> params);
+
+
+    /**
+     * 根据id删除员工
+     * @param id
+     */
+    @Delete("DELETE FROM " + EMPLOYEETABLE + " WHERE id=#{id}")
+    public void deleteById(@Param("id") Integer id);
+
+    /**
+     * 插入员工
+     * @param employee
+     */
+    @SelectProvider(type = EmployeeDynaSqlProvider.class, method = "addEmployee")
+    @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
+    void save(Employee employee);
 }

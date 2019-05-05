@@ -203,6 +203,24 @@ public class HrmServiceImpl implements HrmService {
         return employeeDao.selectByPage(params);
     }
 
+    /**
+     * 根据id删除用户
+     * @param id
+     */
+    @Override
+    public void removeEmployeeById(Integer id) {
+        employeeDao.deleteById(id);
+    }
+
+    /**
+     * 添加用户
+     * @param employee
+     */
+    @Override
+    public void addEmployee(Employee employee) {
+        employeeDao.save(employee);
+    }
+
 
     /*===================================   岗位部分   ======================================*/
 

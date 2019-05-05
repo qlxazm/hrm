@@ -49,4 +49,40 @@ public class EmployeeController {
         mv.setViewName("main");
         return mv;
     }
+
+
+    /**
+     * 根据id删除员工
+     * @param ids
+     * @param mv
+     * @return
+     */
+    @RequestMapping(value = "/employee/removeEmployee")
+    public ModelAndView removeEmployee(String ids, ModelAndView mv) {
+        String[] idArray = ids.split(",");
+        for (String id : idArray) {
+            hrmService.removeEmployeeById(Integer.parseInt(id));
+        }
+        mv.addObject("page", "/employee/selectEmployee");
+        mv.setViewName("main");
+        return mv;
+    }
+
+    @RequestMapping(value = "/employee/addEmployee")
+    public ModelAndView addEmployee(String flag,
+                                    @ModelAttribute Employee employee,
+                                    ModelAndView mv){
+        System.out.println("添加员工 -->> " + employee);
+        if (flag.equals("2")) {
+            hrmService.addEmployee(employee);
+            mv.addObject("message", "添加成功！");
+        }
+        List<Dept> depts = hrmService.findAllDept();
+        List<Job> jobs = hrmService.findAllJob();
+        mv.addObject("depts", depts);
+        mv.addObject("jobs", jobs);
+        mv.addObject("page", "employee/addEmployee.jsp");
+        mv.setViewName("main");
+        return mv;
+    }
 }

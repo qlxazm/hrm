@@ -115,6 +115,19 @@ public interface HrmService {
     public List<Employee> findEmployee(Employee employee, PageModel pageModel);
 
 
+    /**
+     * 根据id删除用户
+     * @param id
+     */
+    public void removeEmployeeById(Integer id);
+
+    /**
+     * 添加用户
+     * @param employee
+     */
+    public void addEmployee(Employee employee);
+
+
     /*===================================   岗位部分   ======================================*/
 
 

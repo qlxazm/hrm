@@ -28,7 +28,7 @@
             </ul>
             <ul>
                 <li><a href="/employee/selectEmployee">员工查询</a></li>
-                <li><a href="#">添加员工</a></li>
+                <li><a href="/employee/addEmployee?flag=1">添加员工</a></li>
             </ul>
         </div>
         <div class="content">
