@@ -64,4 +64,11 @@ public interface DeptDao {
      */
     @Select("SELECT * FROM " + DEPTTABLE + " WHERE id=#{id}")
     Dept selectById(@Param("id") Integer id);
+
+    /**
+     * 查询所有部门数据
+     * @return
+     */
+    @Select("SELECT * FROM " + DEPTTABLE)
+    List<Dept> selectAll();
 }

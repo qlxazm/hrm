@@ -1,8 +1,12 @@
 package org.java.hrm.service.impl;
 
 import org.java.hrm.dao.DeptDao;
+import org.java.hrm.dao.EmployeeDao;
+import org.java.hrm.dao.JobDao;
 import org.java.hrm.dao.UserDao;
 import org.java.hrm.domain.Dept;
+import org.java.hrm.domain.Employee;
+import org.java.hrm.domain.Job;
 import org.java.hrm.domain.User;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.tag.PageModel;
@@ -161,5 +165,57 @@ public class HrmServiceImpl implements HrmService {
     @Override
     public Dept findDeptById(Integer id) {
         return deptDao.selectById(id);
+    }
+
+    /**
+     * 查询出所有部门
+     * @return
+     */
+    @Override
+    public List<Dept> findAllDept() {
+        return deptDao.selectAll();
+    }
+
+    /*==========================   员工部分   ===================================*/
+
+    @Autowired
+    private EmployeeDao employeeDao;
+
+    /**
+     * 分页查询员工信息
+     * @param employee
+     * @param pageModel
+     * @return
+     */
+    @Override
+    public List<Employee> findEmployee(Employee employee, PageModel pageModel) {
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("employee", employee);
+        int employeeCount = employeeDao.count(params);
+        System.out.println("查询出来的符合条件的员工总数：" + employeeCount);
+        pageModel.setRecordCount(employeeCount);
+
+        if (employeeCount > 0){
+            params.put("pageModel", pageModel);
+        }
+
+        return employeeDao.selectByPage(params);
+    }
+
+
+    /*===================================   岗位部分   ======================================*/
+
+
+    @Autowired
+    private JobDao jobDao;
+
+    /**
+     * 查询出所有的工作
+     * @return
+     */
+    @Override
+    public List<Job> findAllJob() {
+        return jobDao.selectAll();
     }
 }

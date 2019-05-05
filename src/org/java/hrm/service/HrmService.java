@@ -1,11 +1,16 @@
 package org.java.hrm.service;
 
+import org.java.hrm.dao.JobDao;
 import org.java.hrm.domain.Dept;
+import org.java.hrm.domain.Employee;
+import org.java.hrm.domain.Job;
 import org.java.hrm.domain.User;
 import org.java.hrm.util.tag.PageModel;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.List;
+import java.util.Map;
 
 public interface HrmService {
 
@@ -91,4 +96,31 @@ public interface HrmService {
      */
     public Dept findDeptById(Integer id);
 
+
+    /**
+     * 查询出所有的部门
+     * @return
+     */
+    public List<Dept> findAllDept();
+
+
+    /*==========================   员工部分   ===================================*/
+
+    /**
+     * 根据条件，查询员工信息
+     * @param employee
+     * @param pageModel
+     * @return
+     */
+    public List<Employee> findEmployee(Employee employee, PageModel pageModel);
+
+
+    /*===================================   岗位部分   ======================================*/
+
+
+    /**
+     * 查询出所有的工作
+     * @return
+     */
+    public List<Job> findAllJob();
 }

@@ -9,6 +9,8 @@ public class Employee implements Serializable {
     private Integer id;
     private Dept dept;          // 员工关联的部门对象
     private Job job;            // 员工关联的工作对象
+    private Integer job_id;
+    private Integer dept_id;
     private String name;
     private String card_id;
     private String address;
@@ -32,8 +34,27 @@ public class Employee implements Serializable {
     private String remark;      // 备注
     private Date create_date;   // 建档日期
 
+
+
+
     public Employee() {
         super();
+    }
+
+    public Integer getJob_id() {
+        return job_id;
+    }
+
+    public void setJob_id(Integer job_id) {
+        this.job_id = job_id;
+    }
+
+    public Integer getDept_id() {
+        return dept_id;
+    }
+
+    public void setDept_id(Integer dept_id) {
+        this.dept_id = dept_id;
     }
 
     public Integer getId() {

@@ -26,6 +26,10 @@
                 <li><a href="/dept/selectDept">部门查询</a></li>
                 <li><a href="/dept/addDept?flag=1">添加部门</a></li>
             </ul>
+            <ul>
+                <li><a href="/employee/selectEmployee">员工查询</a></li>
+                <li><a href="#">添加员工</a></li>
+            </ul>
         </div>
         <div class="content">
             <c:import url="${page}"/>
