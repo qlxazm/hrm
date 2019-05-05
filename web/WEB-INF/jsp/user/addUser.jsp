@@ -31,8 +31,8 @@
             <div class="input"><input type="text" name="password"></div>
         </div>
         <div class="field">
-            <span class="label"></span>
             <div class="input"><input type="submit" value="添加"/></div>
+            <div class="input"><input type="reset" value="取消"/></div>
         </div>
     </form>
 </body>

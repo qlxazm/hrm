@@ -1,5 +1,6 @@
 package org.java.hrm.service;
 
+import org.java.hrm.domain.Dept;
 import org.java.hrm.domain.User;
 import org.java.hrm.util.tag.PageModel;
 
@@ -7,6 +8,10 @@ import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 public interface HrmService {
+
+    /* ==================== 用户部分 ======================== */
+
+
     /**
      * 用户登陆
      * @param loginname
@@ -49,4 +54,22 @@ public interface HrmService {
      * @param user
      */
     public void modifyUser(User user);
+
+
+    /* ========================   部门部分  =========================== */
+
+    /**
+     * 根据条件查询部门信息
+     * @param dept
+     * @param pageModel
+     * @return
+     */
+    public List<Dept> findDept(Dept dept, PageModel pageModel);
+
+    /**
+     * 根据id删除部门信息
+     * @param id
+     */
+    public void removeDeptById(Integer id);
+
 }

@@ -22,6 +22,10 @@
                 <li><a href="/user/selectUser">用户查询</a></li>
                 <li><a href="/user/addUser?flag=1">添加用户</a></li>
             </ul>
+            <ul>
+                <li><a href="/dept/selectDept">部门查询</a></li>
+                <li><a href="#">添加部门</a></li>
+            </ul>
         </div>
         <div class="content">
             <c:import url="${page}"/>

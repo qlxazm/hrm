@@ -30,7 +30,7 @@ public class UserDynaSqlProvider {
         if (params.get("pageModel") != null) {
             sql += " LIMIT #{pageModel.firstLimitParam}, #{pageModel.pageSize} ";
         }
-        System.out.println("动态sql语句之用户分页查询：" + sql);
+        //System.out.println("动态sql语句之用户分页查询：" + sql);
         return sql;
     }
 
@@ -50,7 +50,7 @@ public class UserDynaSqlProvider {
                 }
             }
         }.toString();
-        System.out.println("动态sql语句之查询符合条件的用户总数：" + sql);
+       // System.out.println("动态sql语句之查询符合条件的用户总数：" + sql);
         return sql;
     }
 

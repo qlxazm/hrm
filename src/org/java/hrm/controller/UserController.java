@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -25,6 +24,13 @@ public class UserController {
     @Qualifier("hrmService")
     private HrmService hrmService;
 
+    /**
+     * 更新用户信息
+     * @param flag
+     * @param mv
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/user/updateUser")
     public ModelAndView updateUser(String flag,
                                    ModelAndView mv,

@@ -1,6 +1,8 @@
 package org.java.hrm.service.impl;
 
+import org.java.hrm.dao.DeptDao;
 import org.java.hrm.dao.UserDao;
+import org.java.hrm.domain.Dept;
 import org.java.hrm.domain.User;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.tag.PageModel;
@@ -19,7 +21,8 @@ import java.util.Map;
 @Service("hrmService")
 public class HrmServiceImpl implements HrmService {
 
-    /*     ==============================  用户部分       */
+    /* ==================== 用户部分 ======================== */
+
     @Autowired
     private UserDao userDao;  //自动注入UserDao
 
@@ -95,5 +98,40 @@ public class HrmServiceImpl implements HrmService {
     public User findUserById(Integer id) {
         System.out.println("HrmServiceImpl -- >> findUserById");
         return userDao.selectById(id);
+    }
+
+    /* ========================   部门部分  =========================== */
+
+    @Autowired
+    private DeptDao deptDao; //自动注入deptDao
+
+    /**
+     * 根据条件查询部门
+     * @param dept
+     * @param pageModel
+     * @return
+     */
+    @Transactional(readOnly = true)
+    @Override
+    public List<Dept> findDept(Dept dept, PageModel pageModel) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("dept", dept);
+        int deptCount = deptDao.count(params);
+        System.out.println("查询出来的符合条件的部门总数：" + deptCount);
+        pageModel.setRecordCount(deptCount);
+
+        if (deptCount > 0) {
+            params.put("pageModel", pageModel);
+        }
+        return deptDao.selectByPage(params);
+    }
+
+    /**
+     * 根据id删除部门
+     * @param id
+     */
+    @Override
+    public void removeDeptById(Integer id) {
+        deptDao.deleteById(id);
     }
 }
