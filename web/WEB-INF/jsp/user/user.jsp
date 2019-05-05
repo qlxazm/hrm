@@ -76,7 +76,7 @@
                     </th>
                     <th>
                         <a class="delete" href="/user/removeUser?ids=${user.id}">删除</a>
-                        <a class="update" href="/user/updateUser?id=${user.id}">修改</a>
+                        <a class="update" href="/user/updateUser?id=${user.id}&flag=1">修改</a>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>

@@ -25,6 +25,26 @@ public class UserController {
     @Qualifier("hrmService")
     private HrmService hrmService;
 
+    @RequestMapping(value = "/user/updateUser")
+    public ModelAndView updateUser(String flag,
+                                   ModelAndView mv,
+                                   @ModelAttribute User user
+                                  ){
+        System.out.println("用户更新 -- >> " + user);
+        if (flag.equals("1")) {
+            /** 跳转到用户信息更改页面 */
+            user = hrmService.findUserById(user.getId());
+        }else{
+            /** 真正的更改用户信息 */
+            hrmService.modifyUser(user);
+            mv.addObject("message", "更新成功！");
+        }
+        mv.addObject("user", user);
+        mv.addObject("page", "user/updateUser.jsp");
+        mv.setViewName("main");
+        return mv;
+    }
+
     /**
      * 批量删除用户
      * @param ids
@@ -114,7 +134,9 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/user/addUser")
-    public ModelAndView addUser(String flag, @ModelAttribute User user, ModelAndView mv){
+    public ModelAndView addUser(String flag,
+                                @ModelAttribute User user,
+                                ModelAndView mv){
         System.out.println("/user/addUser -- >> " + user);
         if (flag.equals("1")){
             mv.addObject("page", "user/addUser.jsp");
