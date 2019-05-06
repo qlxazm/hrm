@@ -221,6 +221,25 @@ public class HrmServiceImpl implements HrmService {
         employeeDao.save(employee);
     }
 
+    /**
+     * 根据员工id查询员工信息
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee findEmployeeById(Integer id) {
+        return employeeDao.selectById(id);
+    }
+
+    /**
+     * 更新员工信息
+     * @param employee
+     */
+    @Override
+    public void modifyEmployee(Employee employee) {
+        employeeDao.update(employee);
+    }
+
 
     /*===================================   岗位部分   ======================================*/
 

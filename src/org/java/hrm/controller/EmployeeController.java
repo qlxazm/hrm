@@ -63,25 +63,72 @@ public class EmployeeController {
         for (String id : idArray) {
             hrmService.removeEmployeeById(Integer.parseInt(id));
         }
-        mv.addObject("page", "/employee/selectEmployee");
-        mv.setViewName("main");
+        mv.setViewName("redirect:/employee/selectEmployee");
         return mv;
     }
 
+
+    /**
+     * 添加员工
+     * @param flag
+     * @param employee
+     * @param mv
+     * @return
+     */
     @RequestMapping(value = "/employee/addEmployee")
     public ModelAndView addEmployee(String flag,
                                     @ModelAttribute Employee employee,
                                     ModelAndView mv){
         System.out.println("添加员工 -->> " + employee);
-        if (flag.equals("2")) {
-            hrmService.addEmployee(employee);
-            mv.addObject("message", "添加成功！");
+        String message = "";
+        try{
+            if (flag.equals("2")) {
+                hrmService.addEmployee(employee);
+                message = "添加成功！";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            message = "添加失败！";
+        }finally {
+            mv.addObject("message", message);
+            List<Dept> depts = hrmService.findAllDept();
+            List<Job> jobs = hrmService.findAllJob();
+            mv.addObject("depts", depts);
+            mv.addObject("employee", employee);
+            mv.addObject("jobs", jobs);
+            mv.addObject("page", "employee/addEmployee.jsp");
+            mv.setViewName("main");
+            return mv;
+        }
+    }
+
+    /**
+     * 更新员工信息
+     * @param flag
+     * @param employee
+     * @param mv
+     * @return
+     */
+    @RequestMapping(value = "/employee/updateEmployee")
+    public ModelAndView updateEmployee(String flag,
+                                       @ModelAttribute Employee employee,
+                                       ModelAndView mv){
+
+        System.out.println("更新员工信息 -- >> " + employee);
+
+        if (flag.equals("1")) {
+            employee = hrmService.findEmployeeById(employee.getId());
+        }else{
+            hrmService.modifyEmployee(employee);
+            mv.addObject("message", "修改成功！");
         }
         List<Dept> depts = hrmService.findAllDept();
         List<Job> jobs = hrmService.findAllJob();
+
         mv.addObject("depts", depts);
         mv.addObject("jobs", jobs);
-        mv.addObject("page", "employee/addEmployee.jsp");
+        mv.addObject("employee", employee);
+        mv.addObject("page", "employee/updateEmployee.jsp");
         mv.setViewName("main");
         return mv;
     }

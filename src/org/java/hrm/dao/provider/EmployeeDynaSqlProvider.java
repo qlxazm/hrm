@@ -94,60 +94,131 @@ public class EmployeeDynaSqlProvider {
             {
                 INSERT_INTO(EMPLOYEETABLE);
                 if(employee.getParty() != null && !employee.getParty().equals("")){
-                    VALUES("party", " party=#{party} ");
+                    VALUES("party", " #{party} ");
                 }
                 if(employee.getRace() != null && !employee.getRace().equals("")){
-                    VALUES("race", " race=#{race} ");
+                    VALUES("race", " #{race} ");
                 }
                 if(employee.getEducation() != null && !employee.getEducation().equals("")){
-                    VALUES("education", " education=#{education} ");
+                    VALUES("education", " #{education} ");
                 }
                 if(employee.getSpeciality() != null && !employee.getSpeciality().equals("")){
-                    VALUES("speciality", " speciality=#{speciality} ");
+                    VALUES("speciality", " #{speciality} ");
                 }
                 if(employee.getHobby() != null && !employee.getHobby().equals("")){
-                    VALUES("hobby", " hobby=#{hobby} ");
+                    VALUES("hobby", " #{hobby} ");
                 }
                 if(employee.getRemark() != null && !employee.getRemark().equals("")){
-                    VALUES("remark", " remark=#{remark} ");
+                    VALUES("remark", " #{remark} ");
                 }
                 /** 生日暂时先不管 */
                 /*if(employee.getBirthday() != null){
                     VALUES("birthday", " birthday=#{birthday} ");
                 }*/
                 if(employee.getPhone() != null && !employee.getPhone().equals("")){
-                    VALUES("phone", " phone=#{phone} ");
+                    VALUES("phone", " #{phone} ");
                 }
                 if(employee.getQQ_num() != null && !employee.getQQ_num().equals("")){
-                    VALUES("QQ_num", " QQ_num=#{QQ_num} ");
+                    VALUES("QQ_num", " #{QQ_num} ");
                 }
                 if(employee.getEmail() != null && !employee.getEmail().equals("")){
-                    VALUES("email", " email=#{email} ");
+                    VALUES("email", " #{email} ");
                 }
                 if(employee.getSex() != null){
-                    VALUES("sex", " sex=#{sex} ");
+                    VALUES("sex", " #{sex} ");
                 }
                 if (employee.getTel() != null && !employee.getTel().equals("")) {
-                    VALUES("tel", " tel=#{tel} ");
+                    VALUES("tel", " #{tel} ");
                 }
                 if (employee.getPost_code() != null && !employee.getPost_code().equals("")){
-                    VALUES("post_code", "  post_code=#{post_code} ");
+                    VALUES("post_code", "  #{post_code} ");
                 }
                 if (employee.getAddress() != null && !employee.getAddress().equals("")){
-                    VALUES("address", "  address=#{address} ");
+                    VALUES("address", "  #{address} ");
                 }
                 if (employee.getCard_id() != null && !employee.getCard_id().equals("")){
-                    VALUES("card_id", " card_id=#{card_id} ");
+                    VALUES("card_id", " #{card_id} ");
                 }
                 if (employee.getName() != null && !employee.getName().equals("")) {
-                    VALUES("name", " name=#{name} ");
+                    VALUES("name", " #{name} ");
                 }
                 if (employee.getDept_id() != null){
-                    VALUES("dept_id", " dept_id=#{dept_id} ");
+                    VALUES("dept_id", " #{dept_id} ");
                 }
                 if (employee.getJob_id() != null) {
-                    VALUES("job_id", " job_id=#{job_id} ");
+                    VALUES("job_id", " #{job_id} ");
                 }
+            }
+        }.toString();
+        return sql;
+    }
+
+
+    /**
+     * 更新员工信息
+     * @param employee
+     * @return
+     */
+    public String updateEmployee(Employee employee) {
+        String sql = new SQL(){
+            {
+                UPDATE(EMPLOYEETABLE);
+                if(employee.getParty() != null && !employee.getParty().equals("")){
+                    SET(" party=#{party} ");
+                }
+                if(employee.getRace() != null && !employee.getRace().equals("")){
+                    SET(" race=#{race} ");
+                }
+                if(employee.getEducation() != null && !employee.getEducation().equals("")){
+                    SET(" education=#{education} ");
+                }
+                if(employee.getSpeciality() != null && !employee.getSpeciality().equals("")){
+                    SET(" speciality= #{speciality} ");
+                }
+                if(employee.getHobby() != null && !employee.getHobby().equals("")){
+                    SET(" hobby= #{hobby} ");
+                }
+                if(employee.getRemark() != null && !employee.getRemark().equals("")){
+                    SET(" remark= #{remark} ");
+                }
+                /** 生日暂时先不管 */
+                /*if(employee.getBirthday() != null){
+                    SET("birthday= birthday=#{birthday} ");
+                }*/
+                if(employee.getPhone() != null && !employee.getPhone().equals("")){
+                    SET(" phone= #{phone} ");
+                }
+                if(employee.getQQ_num() != null && !employee.getQQ_num().equals("")){
+                    SET(" QQ_num= #{QQ_num} ");
+                }
+                if(employee.getEmail() != null && !employee.getEmail().equals("")){
+                    SET(" email= #{email} ");
+                }
+                if(employee.getSex() != null){
+                    SET("sex= #{sex} ");
+                }
+                if (employee.getTel() != null && !employee.getTel().equals("")) {
+                    SET(" tel= #{tel} ");
+                }
+                if (employee.getPost_code() != null && !employee.getPost_code().equals("")){
+                    SET(" post_code=  #{post_code} ");
+                }
+                if (employee.getAddress() != null && !employee.getAddress().equals("")){
+                    SET(" address=  #{address} ");
+                }
+                if (employee.getCard_id() != null && !employee.getCard_id().equals("")){
+                    SET(" card_id= #{card_id} ");
+                }
+                if (employee.getName() != null && !employee.getName().equals("")) {
+                    SET(" name= #{name} ");
+                }
+                if (employee.getDept_id() != null){
+                    SET(" dept_id= #{dept_id} ");
+                }
+                if (employee.getJob_id() != null) {
+                    SET(" job_id= #{job_id} ");
+                }
+                WHERE(" id=#{id} ");
             }
         }.toString();
         return sql;

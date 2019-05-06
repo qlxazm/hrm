@@ -50,4 +50,19 @@ public interface EmployeeDao {
     @SelectProvider(type = EmployeeDynaSqlProvider.class, method = "addEmployee")
     @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
     void save(Employee employee);
+
+    /**
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
+    @Select("SELECT * FROM " + EMPLOYEETABLE + " WHERE id=#{id}")
+    Employee selectById(@Param("id") Integer id);
+
+    /**
+     * 更新员工信息
+     * @param employee
+     */
+    @UpdateProvider(type = EmployeeDynaSqlProvider.class, method = "updateEmployee")
+    void update(Employee employee);
 }

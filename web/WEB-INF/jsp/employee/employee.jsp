@@ -121,8 +121,8 @@
                     <th>${employee.remark}</th>
 
                     <th>
-                        <a class="delete" href="?ids=${employee.id}">删除</a>
-                        <a class="update" href="?id=${employee.id}&flag=1">修改</a>
+                        <a class="delete" href="/employee/removeEmployee?ids=${employee.id}">删除</a>
+                        <a class="update" href="/employee/updateEmployee?id=${employee.id}&flag=1">修改</a>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>

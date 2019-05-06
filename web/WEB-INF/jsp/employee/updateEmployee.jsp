@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: qlxazm
@@ -28,6 +29,7 @@
     <%--还有这两个没填写 Date birthday  Date create_date --%>
 
     <div class="wrapper">
+        <input style="display: none" name="id" value="${employee.id}"/>
         <div class="field">
             <span class="label">名称：</span>
             <div class="input"><input type="text" name="name" value="${employee.name}"/></div>
@@ -130,7 +132,7 @@
         </div>
 
         <div class="field" style="display: block">
-            <div class="input"><input type="submit" value="添加"/></div>
+            <div class="input"><input type="submit" value="保存"/></div>
             <div class="input"><input type="reset" value="取消"/></div>
         </div>
     </div>

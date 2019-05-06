@@ -6,11 +6,7 @@ import org.java.hrm.domain.Employee;
 import org.java.hrm.domain.Job;
 import org.java.hrm.domain.User;
 import org.java.hrm.util.tag.PageModel;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
-import java.util.Map;
 
 public interface HrmService {
 
@@ -23,7 +19,7 @@ public interface HrmService {
      * @param password
      * @return
      */
-    public User login(String loginname, String password);
+    User login(String loginname, String password);
 
 
     /**
@@ -31,7 +27,7 @@ public interface HrmService {
      * @param id
      * @return
      */
-    public User findUserById(Integer id);
+    User findUserById(Integer id);
 
     /**
      * 根据条件获取用户
@@ -39,26 +35,26 @@ public interface HrmService {
      * @param pageModel
      * @return
      */
-    public List<User> findUser(User user, PageModel pageModel);
+    List<User> findUser(User user, PageModel pageModel);
 
     /**
      * 添加新的用户
      * @param user
      * @return
      */
-    public void addUser(User user);
+    void addUser(User user);
 
     /**
      * 根据id删除用户
      * @param id
      */
-    public void removeUserById(Integer id);
+    void removeUserById(Integer id);
 
     /**
      * 更新用户
      * @param user
      */
-    public void modifyUser(User user);
+    void modifyUser(User user);
 
 
     /* ========================   部门部分  =========================== */
@@ -69,39 +65,39 @@ public interface HrmService {
      * @param pageModel
      * @return
      */
-    public List<Dept> findDept(Dept dept, PageModel pageModel);
+    List<Dept> findDept(Dept dept, PageModel pageModel);
 
     /**
      * 根据id删除部门信息
      * @param id
      */
-    public void removeDeptById(Integer id);
+    void removeDeptById(Integer id);
 
     /**
      * 插入部门
      * @param dept
      */
-    public void addDept(Dept dept);
+    void addDept(Dept dept);
 
     /**
      * 跟新dept
      * @param dept
      */
-    public void modifyDept(Dept dept);
+    void modifyDept(Dept dept);
 
     /**
      * 根据id查询出dept信息
      * @param id
      * @return
      */
-    public Dept findDeptById(Integer id);
+    Dept findDeptById(Integer id);
 
 
     /**
      * 查询出所有的部门
      * @return
      */
-    public List<Dept> findAllDept();
+    List<Dept> findAllDept();
 
 
     /*==========================   员工部分   ===================================*/
@@ -112,21 +108,34 @@ public interface HrmService {
      * @param pageModel
      * @return
      */
-    public List<Employee> findEmployee(Employee employee, PageModel pageModel);
+    List<Employee> findEmployee(Employee employee, PageModel pageModel);
 
 
     /**
      * 根据id删除用户
      * @param id
      */
-    public void removeEmployeeById(Integer id);
+    void removeEmployeeById(Integer id);
 
     /**
      * 添加用户
      * @param employee
      */
-    public void addEmployee(Employee employee);
+    void addEmployee(Employee employee);
 
+
+    /**
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
+    Employee findEmployeeById(Integer id);
+
+    /**
+     * 更新员工信息
+     * @param employee
+     */
+    void modifyEmployee(Employee employee);
 
     /*===================================   岗位部分   ======================================*/
 
