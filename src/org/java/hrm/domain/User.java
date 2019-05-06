@@ -1,13 +1,21 @@
 package org.java.hrm.domain;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
     private Integer id;
+    @NotBlank(message = "用户名不能为空")
     private String username;
+    @NotBlank(message = "登录名不能为空")
     private String loginname;
+    @NotBlank(message = "密码不能为空")
+    @Pattern(regexp = "[\\w_]{6,16}", message = "密码可以包含字母、下划线，长度在6和16之间")
     private String password;
+    @NotNull(message = "用户状态是必填字段")
     private Integer userstatus;
     private Date createdate;
 

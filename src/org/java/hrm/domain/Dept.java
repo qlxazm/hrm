@@ -1,8 +1,10 @@
 package org.java.hrm.domain;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 public class Dept implements Serializable {
     private Integer id;
+    @NotBlank(message = "部门名称是必填字段")
     private String name;
     private String remark;
     private int employeeNum; // 当前部门下员工的数量

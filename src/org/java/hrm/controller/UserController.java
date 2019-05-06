@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -34,7 +36,8 @@ public class UserController {
     @RequestMapping(value = "/user/updateUser")
     public ModelAndView updateUser(String flag,
                                    ModelAndView mv,
-                                   @ModelAttribute User user
+                                   @Valid @ModelAttribute User user,
+                                   Errors errors
                                   ){
         System.out.println("用户更新 -- >> " + user);
         if (flag.equals("1")) {
@@ -42,8 +45,10 @@ public class UserController {
             user = hrmService.findUserById(user.getId());
         }else{
             /** 真正的更改用户信息 */
-            hrmService.modifyUser(user);
-            mv.addObject("message", "更新成功！");
+            if (!errors.hasErrors()) {
+                hrmService.modifyUser(user);
+                mv.addObject("message", "更新成功！");
+            }
         }
         mv.addObject("user", user);
         mv.addObject("page", "user/updateUser.jsp");
@@ -141,17 +146,18 @@ public class UserController {
      */
     @RequestMapping(value = "/user/addUser")
     public ModelAndView addUser(String flag,
-                                @ModelAttribute User user,
+                                @Valid @ModelAttribute User user,
+                                Errors errors,
                                 ModelAndView mv){
         System.out.println("/user/addUser -- >> " + user);
-        if (flag.equals("1")){
-            mv.addObject("page", "user/addUser.jsp");
-        }else {
-            hrmService.addUser(user);
-            String message = user.getId() != null && user.getId() > 0 ? "添加用户成功！" : "添加用户失败！";
-            mv.addObject("message", message);
-            mv.addObject("page", "user/addUser.jsp");
+        if (flag.equals("2")){
+            if (!errors.hasErrors()) {
+                hrmService.addUser(user);
+                String message = user.getId() != null && user.getId() > 0 ? "添加用户成功！" : "添加用户失败！";
+                mv.addObject("message", message);
+            }
         }
+        mv.addObject("page", "user/addUser.jsp");
         mv.setViewName("main");
         return mv;
     }

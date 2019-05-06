@@ -72,7 +72,7 @@
                         </c:if>
                     </th>
                     <th>
-                        <fmt:formatDate type="both" value="${user.createdate}" dateStyle="medium" timeStyle="medium"/>
+                        <fmt:formatDate type="date" value="${user.createdate}" />
                     </th>
                     <th>
                         <a class="delete" href="/user/removeUser?ids=${user.id}">删除</a>

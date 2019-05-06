@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: qlxazm
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="/static/css/addOrUpdateCommon.css"/>
 </head>
 <body>
+<h2>更新部门信息</h2>
 <c:if test="${message.indexOf(\"成功\") >= 0}">
     <p class="success">${message}</p>
 </c:if>
@@ -20,20 +22,21 @@
     <p class="error">${message}</p>
 </c:if>
 
-<form method="post" action="updateDept?flag=2">
-    <input type="text" style="display: none" name="id" value="${dept.id}"/>
+<form:form modelAttribute="dept" method="post" action="updateDept?flag=2">
+    <form:hidden path="id"/>
     <div class="field">
-        <span class="label">名称：</span>
-        <div class="input"><input type="text" name="name" value="${dept.name}"/></div>
+        <span class="label"><i style="color: red">*</i>&nbsp;&nbsp;名称：</span>
+        <div class="input"><form:input path="name"/></div>
+        <form:errors path="name" cssClass="message"/>
     </div>
     <div class="field">
         <span class="label">描述：</span>
-        <div class="input"><input type="text" name="remark" value="${dept.remark}"/></div>
+        <div class="input"><form:input path="remark"/></div>
     </div>
     <div class="field">
         <div class="input"><input type="submit" value="保存"/></div>
         <div class="input"><input type="reset" value="取消"/></div>
     </div>
-</form>
+</form:form>
 </body>
 </html>

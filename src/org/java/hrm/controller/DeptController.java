@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -71,16 +73,18 @@ public class DeptController {
      */
     @RequestMapping(value = "/dept/addDept")
     public ModelAndView addDept(String flag,
-                                @ModelAttribute Dept dept,
+                                @Valid @ModelAttribute Dept dept,
+                                Errors errors,
                                 ModelAndView mv) {
         System.out.println("添加dept -- >> " + dept);
         if (flag != null && flag.equals("2")){
             /** 真正的添加dept */
-            hrmService.addDept(dept);
-            String message = dept.getId() != null && dept.getId() > 0 ? "添加成功！" : "添加失败！";
-            mv.addObject("message", message);
+            if (!errors.hasErrors()) {
+                hrmService.addDept(dept);
+                String message = dept.getId() != null && dept.getId() > 0 ? "添加成功！" : "添加失败！";
+                mv.addObject("message", message);
+            }
         }
-
         mv.addObject("page", "dept/addDept.jsp");
         mv.setViewName("/main");
         return mv;
@@ -88,15 +92,18 @@ public class DeptController {
 
     @RequestMapping(value = "/dept/updateDept")
     public ModelAndView updateDept(String flag,
-                                   @ModelAttribute Dept dept,
+                                   @Valid @ModelAttribute Dept dept,
+                                   Errors errors,
                                    ModelAndView mv){
         if (flag.equals("1")){
             /** 只是跳转到更新页面 */
             dept = hrmService.findDeptById(dept.getId());
         }else{
             /** 进行更新 */
-            hrmService.modifyDept(dept);
-            mv.addObject("message", "更新成功！");
+            if (!errors.hasErrors()) {
+                hrmService.modifyDept(dept);
+                mv.addObject("message", "更新成功！");
+            }
         }
         mv.addObject("dept", dept);
         mv.addObject("page", "dept/updateDept.jsp");

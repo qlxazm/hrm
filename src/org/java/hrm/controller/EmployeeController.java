@@ -86,10 +86,12 @@ public class EmployeeController {
         String message = "";
         try{
             if (flag.equals("2")) {
-                message = "添加失败！";
+                message = "添加员工失败！";
                 if (!errors.hasErrors()) {
                     hrmService.addEmployee(employee);
-                    message = "添加成功！";
+                    if (employee.getId() != null && employee.getId() > 0){
+                        message = "添加员工成功！";
+                    }
                 }
             }
         }catch (Exception e){

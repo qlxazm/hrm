@@ -25,6 +25,7 @@
                 <span class="label">密&nbsp;&nbsp;&nbsp;码：</span>
                 <div class="input"><input type="password" name="password"></div>
             </div>
+            <p class="message">${message}</p>
             <div class="field">
                 <span class="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <div class="input login"><input type="submit" value="登录"/></div>

@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-<h2>添加用户信息</h2>
+<h2>添加员工信息</h2>
 <%--还有这两个没填写Date create_date --%>
 <c:if test="${message.indexOf(\"成功\") >= 0}">
     <p class="success">${message}</p>
@@ -26,7 +26,7 @@
 <c:if test="${message.indexOf(\"失败\") >= 0}">
     <p class="error">${message}</p>
 </c:if>
-<form:form modelAttribute="employee" method="post" action="updateEmployee?flag=2">
+<form:form modelAttribute="employee" method="post" action="addEmployee?flag=2">
     <div class="wrapper">
         <div class="field">
             <span class="label"><i style="color: red">*</i>&nbsp;&nbsp;&nbsp;姓名：</span>
