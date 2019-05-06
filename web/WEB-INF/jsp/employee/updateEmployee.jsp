@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-<h2>更新用户信息</h2>
+<h2>更新员工信息</h2>
 <%--还有这两个没填写Date create_date --%>
 <c:if test="${message.indexOf(\"成功\") >= 0}">
     <p class="success">${message}</p>
