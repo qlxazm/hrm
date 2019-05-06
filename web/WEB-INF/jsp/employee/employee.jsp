@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="page" uri="/pager-tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <head>
@@ -111,8 +111,8 @@
                     <th>${employee.sex}</th>
                     <th>${employee.party}</th>
                     <th>
-                            ${employee.birthday}
-                       <%-- <fmt:formatDate type="both" value="${employee.birthday}" dateStyle="medium" timeStyle="medium"/>--%>
+                            <%--${employee.birthday}--%>
+                       <fmt:formatDate type="date" value="${employee.birthday}" />
                     </th>
                     <th>${employee.race}</th>
                     <th>${employee.education}</th>

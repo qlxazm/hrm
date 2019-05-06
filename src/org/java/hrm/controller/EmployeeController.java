@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.Errors;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -77,18 +79,21 @@ public class EmployeeController {
      */
     @RequestMapping(value = "/employee/addEmployee")
     public ModelAndView addEmployee(String flag,
-                                    @ModelAttribute Employee employee,
+                                    @Valid @ModelAttribute Employee employee,
+                                    Errors errors,
                                     ModelAndView mv){
         System.out.println("添加员工 -->> " + employee);
         String message = "";
         try{
             if (flag.equals("2")) {
-                hrmService.addEmployee(employee);
-                message = "添加成功！";
+                message = "添加失败！";
+                if (!errors.hasErrors()) {
+                    hrmService.addEmployee(employee);
+                    message = "添加成功！";
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
-            message = "添加失败！";
         }finally {
             mv.addObject("message", message);
             List<Dept> depts = hrmService.findAllDept();
@@ -111,7 +116,8 @@ public class EmployeeController {
      */
     @RequestMapping(value = "/employee/updateEmployee")
     public ModelAndView updateEmployee(String flag,
-                                       @ModelAttribute Employee employee,
+                                      @Valid @ModelAttribute Employee employee,
+                                        Errors errors,
                                        ModelAndView mv){
 
         System.out.println("更新员工信息 -- >> " + employee);
@@ -119,8 +125,10 @@ public class EmployeeController {
         if (flag.equals("1")) {
             employee = hrmService.findEmployeeById(employee.getId());
         }else{
-            hrmService.modifyEmployee(employee);
-            mv.addObject("message", "修改成功！");
+            if (!errors.hasErrors()) {
+                hrmService.modifyEmployee(employee);
+                mv.addObject("message", "修改成功！");
+            }
         }
         List<Dept> depts = hrmService.findAllDept();
         List<Job> jobs = hrmService.findAllJob();

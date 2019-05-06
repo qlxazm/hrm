@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: qlxazm
@@ -12,8 +13,14 @@
     <link rel="stylesheet" href="/static/css/addOrUpdateCommon.css"/>
 </head>
 <body>
+<c:if test="${message.indexOf(\"成功\") >= 0}">
+    <p class="success">${message}</p>
+</c:if>
+<c:if test="${message.indexOf(\"失败\") >= 0}">
+    <p class="error">${message}</p>
+</c:if>
+
 <form method="post" action="updateDept?flag=2">
-    <p class="message">${message}</p>
     <input type="text" style="display: none" name="id" value="${dept.id}"/>
     <div class="field">
         <span class="label">名称：</span>

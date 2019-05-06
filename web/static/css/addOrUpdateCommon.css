@@ -3,3 +3,7 @@
 .input > input{padding: 3px 8px;}
 .label{font-size: 1.5em;min-width: 75px; text-align: right}
 .input, .label{display: inline-block}
+.message{color: #FF0000;font-size: 1.2em; font-weight: 700;}
+.error,.success{font-size: 1.5em; font-weight: 700;}
+.success{color: #00FF00;}
+.error{color: #FF0000;}
