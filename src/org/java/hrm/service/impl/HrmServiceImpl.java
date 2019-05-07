@@ -1,13 +1,7 @@
 package org.java.hrm.service.impl;
 
-import org.java.hrm.dao.DeptDao;
-import org.java.hrm.dao.EmployeeDao;
-import org.java.hrm.dao.JobDao;
-import org.java.hrm.dao.UserDao;
-import org.java.hrm.domain.Dept;
-import org.java.hrm.domain.Employee;
-import org.java.hrm.domain.Job;
-import org.java.hrm.domain.User;
+import org.java.hrm.dao.*;
+import org.java.hrm.domain.*;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -254,5 +248,14 @@ public class HrmServiceImpl implements HrmService {
     @Override
     public List<Job> findAllJob() {
         return jobDao.selectAll();
+    }
+
+    /*========================================  用户权限部分  =================================*/
+    @Autowired
+    private OperationDao operationDao;
+
+    @Override
+    public List<Operation> selectOperationByUid(Integer id) {
+        return operationDao.selectByUid(id);
     }
 }

@@ -1,11 +1,11 @@
 package org.java.hrm.service;
 
 import org.java.hrm.dao.JobDao;
-import org.java.hrm.domain.Dept;
-import org.java.hrm.domain.Employee;
-import org.java.hrm.domain.Job;
-import org.java.hrm.domain.User;
+import org.java.hrm.dao.OperationDao;
+import org.java.hrm.domain.*;
 import org.java.hrm.util.tag.PageModel;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 public interface HrmService {
@@ -144,5 +144,12 @@ public interface HrmService {
      * 查询出所有的工作
      * @return
      */
-    public List<Job> findAllJob();
+    List<Job> findAllJob();
+
+
+    /*========================================  用户权限部分  =================================*/
+
+
+    List<Operation> selectOperationByUid(Integer id);
+
 }

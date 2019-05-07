@@ -1,9 +1,7 @@
 package org.java.hrm.interceptor;
 
-import com.sun.org.apache.bcel.internal.generic.FADD;
 import org.java.hrm.domain.User;
 import org.java.hrm.util.common.HrmConstants;
-import org.springframework.web.portlet.ModelAndView;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
