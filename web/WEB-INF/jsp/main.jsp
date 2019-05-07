@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="/static/css/neat.css"/>
     <link rel="stylesheet" href="/static/css/common.css"/>
     <link rel="stylesheet" href="/static/css/main.css"/>
+    <link rel="stylesheet" href="/static/css/menu.css"/>
     <link rel="stylesheet" href="/static/css/pagination.css"/>
     <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/menu.js"></script>
 </head>
 <body>
     <div class="header">
@@ -18,17 +20,32 @@
     </div>
     <div>
         <div class="sideBar">
-            <ul>
-                <li><a href="/user/selectUser">用户查询</a></li>
-                <li><a href="/user/addUser?flag=1">添加用户</a></li>
+            <ul class="menu">
+                <li><a href="javascript:void(0)">用户管理</a></li>
+                <li>
+                    <ul class="sub_menu">
+                        <li><a href="/user/selectUser">用户查询</a></li>
+                        <li><a href="/user/addUser?flag=1">添加用户</a></li>
+                    </ul>
+                </li>
             </ul>
-            <ul>
-                <li><a href="/dept/selectDept">部门查询</a></li>
-                <li><a href="/dept/addDept?flag=1">添加部门</a></li>
+            <ul class="menu">
+                <li><a href="javascript:void(0)">部门管理</a></li>
+                <li>
+                    <ul class="sub_menu">
+                        <li><a href="/dept/selectDept">部门查询</a></li>
+                        <li><a href="/dept/addDept?flag=1">添加部门</a></li>
+                    </ul>
+                </li>
             </ul>
-            <ul>
-                <li><a href="/employee/selectEmployee">员工查询</a></li>
-                <li><a href="/employee/addEmployee?flag=1">添加员工</a></li>
+            <ul class="menu">
+                <li><a href="javascript:void(0)">员工管理</a></li>
+                <li>
+                    <ul class="sub_menu">
+                        <li><a href="/employee/selectEmployee">员工查询</a></li>
+                        <li><a href="/employee/addEmployee?flag=1">添加员工</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <div class="content">

@@ -1,0 +1,5 @@
+.menu a{display: block;width: 100%;box-sizing: border-box;padding: 0 10px 0 20px;min-width: 100px;border-bottom: 1px solid #AAAAAA;}
+.menu_active,.menu > li:first-child a:hover{background-color: #666666; border: transparent;color: #FFFFFF !important;}
+.menu > li:last-child a{padding:0;padding-left:30px;width: 100%; border: none;}
+.menu > li:last-child{overflow: hidden; height: 0px;}
+.sub_menu_active, .sub_menu > li a:hover{background-color: #409EFF; color: #ffffff !important;}
