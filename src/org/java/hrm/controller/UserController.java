@@ -1,5 +1,6 @@
 package org.java.hrm.controller;
 
+import org.java.hrm.domain.Operation;
 import org.java.hrm.domain.User;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.common.HrmConstants;
@@ -89,6 +90,8 @@ public class UserController {
                               ModelAndView mv){
         User user = hrmService.login(loginname, password);
         if (user != null) {
+            List<Operation> operations = hrmService.selectOperationByUid(user.getId());
+            session.setAttribute(HrmConstants.USER_OPERATION_SESSION, operations);
             session.setAttribute(HrmConstants.USER_SESSION, user);
             mv.setViewName("redirect:/main");
         }else {
@@ -108,6 +111,7 @@ public class UserController {
     public ModelAndView logout(ModelAndView mv, HttpServletRequest request){
         HttpSession session = request.getSession();
         session.removeAttribute(HrmConstants.USER_SESSION);
+        session.removeAttribute(HrmConstants.USER_OPERATION_SESSION);
         mv.setViewName("redirect:/loginForm");
         return mv;
     }

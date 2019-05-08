@@ -7,8 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="page" uri="/pager-tags" %>
+<%@ taglib prefix="opertation" uri="/operation-test" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="org.java.hrm.util.common.HrmConstants" %>
+
 <html>
 <head>
     <title>用户列表页面</title>
@@ -75,8 +78,12 @@
                         <fmt:formatDate type="date" value="${user.createdate}" />
                     </th>
                     <th>
-                        <a class="delete" href="/user/removeUser?ids=${user.id}">删除</a>
-                        <a class="update" href="/user/updateUser?id=${user.id}&flag=1">修改</a>
+                        <c:if test="${opertation:operationTest('/user/removeUser?ids='.concat(user.id), sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                            <a class="delete" href="/user/removeUser?ids=${user.id}">删除</a>
+                        </c:if>
+                        <c:if test="${opertation:operationTest('/user/updateUser?id='.concat(user.id), sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                            <a class="update" href="/user/updateUser?id=${user.id}&flag=1">修改</a>
+                        </c:if>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>

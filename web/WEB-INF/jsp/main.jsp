@@ -2,6 +2,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page import="org.java.hrm.util.common.HrmConstants" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="opertation" uri="/operation-test" %>
+
 <html>
 <head>
     <title>主页</title>
@@ -25,7 +27,11 @@
                 <li>
                     <ul class="sub_menu">
                         <li><a href="/user/selectUser">用户查询</a></li>
-                        <li><a href="/user/addUser?flag=1">添加用户</a></li>
+                        <li>
+                            <c:if test="${opertation:operationTest('/user/addUser?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                                <a href="/user/addUser?flag=1">添加用户</a>
+                            </c:if>
+                        </li>
                     </ul>
                 </li>
             </ul>

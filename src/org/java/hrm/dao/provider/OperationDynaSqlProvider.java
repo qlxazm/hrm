@@ -11,10 +11,10 @@ import static org.java.hrm.util.common.HrmConstants.OPERATIONTABLE;
 
 public class OperationDynaSqlProvider {
 
-    public String selectByUid(Integer id){
+    public String selectByUid(){
         String sql = new SQL(){
             {
-                SELECT(" u.loginname,u.username,o.name, o.code, o.url ");
+                SELECT(" o.* ");
                 FROM(USERTABLE + " as u ");
                 FROM(USERROLETABLE + " as ur ");
                 FROM(ROLETABLE + " as r ");
@@ -23,11 +23,17 @@ public class OperationDynaSqlProvider {
                 FROM(PERMISSIONOPERATIONTABLE + " as po ");
                 FROM(OPERATIONTABLE + " as o ");
                 WHERE(" u.id = ur.userid ");
+                AND();
                 WHERE(" ur.roleid = r.id ");
+                AND();
                 WHERE(" r.id = rp.roleid ");
+                AND();
                 WHERE(" rp.permissionid = p.id ");
+                AND();
                 WHERE(" p.id = po.permissionid ");
+                AND();
                 WHERE(" po.operationid = o.id ");
+                AND();
                 WHERE(" u.id = #{id} ");
             }
         }.toString();
