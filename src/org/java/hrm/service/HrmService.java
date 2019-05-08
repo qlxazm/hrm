@@ -161,6 +161,21 @@ public interface HrmService {
      */
     List<Role> selectAllRole();
 
+    /**
+     * 根据条件查询角色信息
+     * @param role
+     * @param pageModel
+     * @return
+     */
+    List<Role> findRole(Role role, PageModel pageModel);
+
+
+    /**
+     * 珊瑚角色
+     * @param ids
+     */
+    void removeRole(String ids);
+
     /*==========================================      用户角色中间表      =============================*/
 
     void addUserRole(UserRole userRole);

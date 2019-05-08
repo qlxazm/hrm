@@ -309,6 +309,38 @@ public class HrmServiceImpl implements HrmService {
         return roleDao.selectAll();
     }
 
+
+    /**
+     * 根据参数分页角色
+     * @param role
+     * @param pageModel
+     * @return
+     */
+    @Transactional(readOnly = true)
+    @Override
+    public List<Role> findRole(Role role, PageModel pageModel) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("role", role);
+        int roleCount = roleDao.count(params);
+        System.out.println("查询到的符合条件的角色数目：" + roleCount);
+        pageModel.setRecordCount(roleCount);
+        if (roleCount > 0) {
+            params.put("pageModel", pageModel);
+        }
+        return roleDao.selectByPage(params);
+    }
+
+
+    @Transactional
+    @Override
+    public void removeRole(String ids) {
+        for (String id : ids.split(",")) {
+            roleDao.deleteRolePermissionByRoleId(Integer.parseInt(id));
+            roleDao.deleteById(Integer.parseInt(id));
+        }
+    }
+
+
     /*==========================================      用户角色中间表      =============================*/
 
     @Autowired

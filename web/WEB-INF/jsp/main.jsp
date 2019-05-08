@@ -36,6 +36,15 @@
                 </li>
             </ul>
             <ul class="menu">
+                <li><a href="javascript:void(0)">角色管理</a></li>
+                <li>
+                    <ul class="sub_menu">
+                        <li><a href="/role/selectRole">角色查询</a></li>
+                        <li><a href="#">添加角色</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="menu">
                 <li><a href="javascript:void(0)">部门管理</a></li>
                 <li>
                     <ul class="sub_menu">
