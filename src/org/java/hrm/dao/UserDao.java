@@ -1,6 +1,7 @@
 package org.java.hrm.dao;
 import com.sun.corba.se.spi.ior.ObjectKey;
 import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 import org.java.hrm.dao.provider.UserDynaSqlProvider;
 import org.java.hrm.domain.User;
 
@@ -27,6 +28,18 @@ public interface UserDao {
      * @return
      */
     @Select("SELECT * FROM " + USERTABLE + " WHERE id = #{id}")
+    @Results({
+            @Result(id = true, column = "id", property = "id"),
+            @Result(column = "username", property = "username"),
+            @Result(column = "loginname", property = "loginname"),
+            @Result(column = "userstatus", property = "userstatus"),
+            @Result(column = "createdate", property = "createdate"),
+            @Result(column = "id", property = "roles",
+                    many = @Many(
+                            select = "org.java.hrm.dao.RoleDao.selectWithUserId",
+                            fetchType = FetchType.LAZY
+                    ))
+    })
     User selectById(@Param("id") Integer id);
 
     /**
@@ -35,6 +48,18 @@ public interface UserDao {
      * @return
      */
     @SelectProvider(type = UserDynaSqlProvider.class, method = "selectWithParam")
+    @Results({
+            @Result(id = true, column = "id", property = "id"),
+            @Result(column = "username", property = "username"),
+            @Result(column = "loginname", property = "loginname"),
+            @Result(column = "userstatus", property = "userstatus"),
+            @Result(column = "createdate", property = "createdate"),
+            @Result(column = "id", property = "roles",
+            many = @Many(
+                    select = "org.java.hrm.dao.RoleDao.selectWithUserId",
+                    fetchType = FetchType.LAZY
+            ))
+    })
     List<User> selectByPage(Map<String, Object> params);
 
     /**

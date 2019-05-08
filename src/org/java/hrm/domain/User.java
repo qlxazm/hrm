@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class User implements Serializable {
     private Integer id;
@@ -17,6 +18,13 @@ public class User implements Serializable {
     private String password;
     @NotNull(message = "用户状态是必填字段")
     private Integer userstatus;
+
+    @NotBlank(message = "角色是必填字段")
+    private String role_ids;
+
+    private List<Role> roles;
+
+
     private Date createdate;
 
     public User() {
@@ -74,5 +82,21 @@ public class User implements Serializable {
 
     public void setCreatedate(Date createdate) {
         this.createdate = createdate;
+    }
+
+    public String getRole_ids() {
+        return role_ids;
+    }
+
+    public void setRole_ids(String role_ids) {
+        this.role_ids = role_ids;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

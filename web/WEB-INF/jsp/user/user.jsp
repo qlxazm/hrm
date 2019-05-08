@@ -42,9 +42,11 @@
         </form>
     </div>
     <div class="tool_bar">
-        <div class="field">
-            <div class="input"><button class="batchDelete">批量删除</button></div>
-        </div>
+        <c:if test="${opertation:operationTest('/user/removeUser?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+            <div class="field">
+                <div class="input"><button class="batchDelete">批量删除</button></div>
+            </div>
+        </c:if>
     </div>
 
     <%--内容栏--%>
@@ -55,6 +57,7 @@
                 <th>序号</th>
                 <th>用户名</th>
                 <th>登录名</th>
+                <th>用户角色</th>
                 <th>用户状态</th>
                 <th>创建时间</th>
                 <th>操作</th>
@@ -66,6 +69,11 @@
                     <th>${index}</th>
                     <th>${user.username}</th>
                     <th>${user.loginname}</th>
+                    <th>
+                        <c:forEach items="${user.roles}" var="role">
+                            <span>${role.name}</span>
+                        </c:forEach>
+                    </th>
                     <th>
                         <c:if test="${user.userstatus == 2}">
                             <span>活跃</span>

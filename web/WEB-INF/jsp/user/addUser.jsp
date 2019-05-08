@@ -34,6 +34,13 @@
         <form:errors cssClass="message" path="loginname"/>
     </div>
     <div class="field">
+        <span class="label"><i style="color: red">*</i>&nbsp;&nbsp;角色：</span>
+        <div class="input">
+            <form:checkboxes items="${roles}" itemValue="id" itemLabel="name" path="role_ids"/>
+        </div>
+        <form:errors cssClass="message" path="roles"/>
+    </div>
+    <div class="field">
         <span class="label"><i style="color: red">*</i>&nbsp;&nbsp;用户状态：</span>
         <div class="input">
             <form:select path="userstatus">

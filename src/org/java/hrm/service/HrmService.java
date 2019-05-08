@@ -46,9 +46,9 @@ public interface HrmService {
 
     /**
      * 根据id删除用户
-     * @param id
+     * @param ids
      */
-    void removeUserById(Integer id);
+    void removeUser(String ids);
 
     /**
      * 更新用户
@@ -151,5 +151,18 @@ public interface HrmService {
 
 
     List<Operation> selectOperationByUid(Integer id);
+
+
+    /*===========================================   角色部分  =================================*/
+
+    /**
+     * 查询所有的角色
+     * @return
+     */
+    List<Role> selectAllRole();
+
+    /*==========================================      用户角色中间表      =============================*/
+
+    void addUserRole(UserRole userRole);
 
 }

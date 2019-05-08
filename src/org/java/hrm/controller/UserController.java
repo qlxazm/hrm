@@ -1,13 +1,16 @@
 package org.java.hrm.controller;
 
 import org.java.hrm.domain.Operation;
+import org.java.hrm.domain.Role;
 import org.java.hrm.domain.User;
+import org.java.hrm.domain.UserRole;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.common.HrmConstants;
 import org.java.hrm.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,20 +45,34 @@ public class UserController {
                                    Errors errors
                                   ){
         System.out.println("用户更新 -- >> " + user);
-        if (flag.equals("1")) {
-            /** 跳转到用户信息更改页面 */
-            user = hrmService.findUserById(user.getId());
-        }else{
-            /** 真正的更改用户信息 */
-            if (!errors.hasErrors()) {
-                hrmService.modifyUser(user);
-                mv.addObject("message", "更新成功！");
+
+        try{
+            if (flag.equals("1")) {
+                /** 跳转到用户信息更改页面 */
+                user = hrmService.findUserById(user.getId());
+            }else{
+                /** 真正的更改用户信息 */
+                if (!errors.hasErrors()) {
+                    hrmService.modifyUser(user);
+                    mv.addObject("message", "更新成功！");
+                }
+            }
+        }catch (Exception e){
+            mv.addObject("message", "更新失败！");
+        }finally {
+            List<Role> roles = new ArrayList<>();
+            try{
+                roles = hrmService.selectAllRole();
+            }catch (Exception e){
+                mv.addObject("message", "查询角色信息失败！");
+            }finally {
+                mv.addObject("roles", roles);
+                mv.addObject("user", user);
+                mv.addObject("page", "user/updateUser.jsp");
+                mv.setViewName("main");
+                return mv;
             }
         }
-        mv.addObject("user", user);
-        mv.addObject("page", "user/updateUser.jsp");
-        mv.setViewName("main");
-        return mv;
     }
 
     /**
@@ -65,14 +83,15 @@ public class UserController {
      */
     @RequestMapping(value = "/user/removeUser")
     public ModelAndView removeUser(String ids, ModelAndView mv){
-        System.out.println("介绍到的参数：" + ids);
-        String[] idArray = ids.split(",");
-        for (String id : idArray) {
-            /** 根据id删除用户 */
-            hrmService.removeUserById(Integer.parseInt(id));
+        System.out.println("删除用户 -- >> " + ids);
+        try{
+            hrmService.removeUser(ids);
+        }catch (Exception e){
+            System.out.println("删除用户时，出现了错误。这个用户的id是：" + ids);
+        }finally {
+            mv.setViewName("redirect:/user/selectUser");
+            return  mv;
         }
-        mv.setViewName("redirect:/user/selectUser");
-        return  mv;
     }
 
     /**
@@ -143,6 +162,8 @@ public class UserController {
 
     /**
      * 添加用户
+     * 添加新的用户时，还需要为用户指定角色信息，所以需要操作用户表和角色表，用户必须有角色，
+     * 需要使用事务保持数据库的一致性。
      * @param flag   flag=1 只是跳转到添加用户界面  flag=2 添加用户
      * @param user
      * @param mv
@@ -154,25 +175,49 @@ public class UserController {
                                 Errors errors,
                                 ModelAndView mv){
         System.out.println("/user/addUser -- >> " + user);
-        if (flag.equals("2")){
-            if (!errors.hasErrors()) {
-                hrmService.addUser(user);
-                String message = user.getId() != null && user.getId() > 0 ? "添加用户成功！" : "添加用户失败！";
+        String message = "";
+
+        try{
+            if (flag.equals("2")){
+                if (!errors.hasErrors()) {
+                    hrmService.addUser(user);
+                    message = "添加用户成功！";
+                }
+            }
+        }catch (Exception e){
+            message = "添加用户失败！";
+        }finally {
+            List<Role> roles = new ArrayList<>();
+            try{
+                roles = hrmService.selectAllRole();
+            }catch (Exception e) {
+                message = "加载角色信息失败！";
+            }finally {
+                mv.addObject("roles", roles);
                 mv.addObject("message", message);
+                mv.addObject("page", "user/addUser.jsp");
+                mv.setViewName("main");
+                return mv;
             }
         }
-        mv.addObject("page", "user/addUser.jsp");
-        mv.setViewName("main");
-        return mv;
     }
 
+    /**
+     * 请求登录页面
+     * @param mv
+     * @return
+     */
     @RequestMapping(value = "/loginForm")
     public ModelAndView loginForm(ModelAndView mv) {
         mv.setViewName("/loginForm");
         return mv;
     }
 
-
+    /**
+     * 请求main页面
+     * @param mv
+     * @return
+     */
     @RequestMapping(value = "/main")
     public ModelAndView main(ModelAndView mv) {
         mv.setViewName("/main");

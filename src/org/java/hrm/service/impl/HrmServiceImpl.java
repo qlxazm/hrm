@@ -26,20 +26,35 @@ public class HrmServiceImpl implements HrmService {
 
     /**
      * 根据id删除用户
-     * @param id
+     * @param ids
      */
+    @Transactional
     @Override
-    public void removeUserById(Integer id) {
-        userDao.deleteById(id);
+    public void removeUser(String ids) {
+        for (String id : ids.split(",")) {
+            userRoleDao.removeByUserId(Integer.parseInt(id));
+            userDao.deleteById(Integer.parseInt(id));
+        }
     }
 
     /**
      * 修改用户
+     * 对于用户角色的修改，应该先删除userrole中间表中的记录，再增加新的记录
      * @param user
      */
+    @Transactional
     @Override
     public void modifyUser(User user) {
         userDao.update(user);
+        /** 删除用户原来的角色信息 */
+        userRoleDao.removeByUserId(user.getId());
+        /** 添加新的角色 */
+        UserRole userRole = new UserRole();
+        for (String roleId : user.getRole_ids().split(",")) {
+            userRole.setUserid(user.getId());
+            userRole.setRoleid(Integer.parseInt(roleId));
+            userRoleDao.save(userRole);
+        }
     }
 
     /**
@@ -47,9 +62,17 @@ public class HrmServiceImpl implements HrmService {
      * @param user
      * @return
      */
+    @Transactional
     @Override
     public void addUser(User user) {
         userDao.save(user);
+        /**储存用户的角色信息*/
+        UserRole userRole = new UserRole();
+        for (String roleId : user.getRole_ids().split(",")) {
+            userRole.setRoleid(Integer.parseInt(roleId));
+            userRole.setUserid(user.getId());
+            addUserRole(userRole);
+        }
     }
 
     /**
@@ -156,6 +179,7 @@ public class HrmServiceImpl implements HrmService {
      * @param id
      * @return
      */
+    @Transactional(readOnly = true)
     @Override
     public Dept findDeptById(Integer id) {
         return deptDao.selectById(id);
@@ -165,6 +189,7 @@ public class HrmServiceImpl implements HrmService {
      * 查询出所有部门
      * @return
      */
+    @Transactional(readOnly = true)
     @Override
     public List<Dept> findAllDept() {
         return deptDao.selectAll();
@@ -181,6 +206,7 @@ public class HrmServiceImpl implements HrmService {
      * @param pageModel
      * @return
      */
+    @Transactional(readOnly = true)
     @Override
     public List<Employee> findEmployee(Employee employee, PageModel pageModel) {
 
@@ -220,6 +246,7 @@ public class HrmServiceImpl implements HrmService {
      * @param id
      * @return
      */
+    @Transactional(readOnly = true)
     @Override
     public Employee findEmployeeById(Integer id) {
         return employeeDao.selectById(id);
@@ -245,17 +272,50 @@ public class HrmServiceImpl implements HrmService {
      * 查询出所有的工作
      * @return
      */
+    @Transactional(readOnly = true)
     @Override
     public List<Job> findAllJob() {
         return jobDao.selectAll();
     }
 
     /*========================================  用户权限部分  =================================*/
+
     @Autowired
     private OperationDao operationDao;
 
+    /**
+     * 根据用户id查询出他权限范围内的操作
+     * @param id
+     * @return
+     */
+    @Transactional(readOnly = true)
     @Override
     public List<Operation> selectOperationByUid(Integer id) {
         return operationDao.selectByUid(id);
+    }
+
+    /*===========================================   角色部分  =================================*/
+
+    @Autowired
+    private RoleDao roleDao;
+
+    /**
+     * 查询所有的角色
+     * @return
+     */
+    @Transactional(readOnly = true)
+    @Override
+    public List<Role> selectAllRole() {
+        return roleDao.selectAll();
+    }
+
+    /*==========================================      用户角色中间表      =============================*/
+
+    @Autowired
+    private UserRoleDao userRoleDao;
+
+    @Override
+    public void addUserRole(UserRole userRole) {
+        userRoleDao.save(userRole);
     }
 }
