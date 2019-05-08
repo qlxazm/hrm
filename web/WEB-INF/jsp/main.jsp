@@ -40,7 +40,11 @@
                 <li>
                     <ul class="sub_menu">
                         <li><a href="/dept/selectDept">部门查询</a></li>
-                        <li><a href="/dept/addDept?flag=1">添加部门</a></li>
+                        <li>
+                            <c:if test="${opertation:operationTest('/dept/addDept?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                                <a href="/dept/addDept?flag=1">添加部门</a>
+                            </c:if>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -49,7 +53,11 @@
                 <li>
                     <ul class="sub_menu">
                         <li><a href="/employee/selectEmployee">员工查询</a></li>
-                        <li><a href="/employee/addEmployee?flag=1">添加员工</a></li>
+                        <li>
+                            <c:if test="${opertation:operationTest('/employee/addEmployee?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                                <a href="/employee/addEmployee?flag=1">添加员工</a>
+                            </c:if>
+                        </li>
                     </ul>
                 </li>
             </ul>

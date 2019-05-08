@@ -9,6 +9,10 @@
 <%@ taglib prefix="page" uri="/pager-tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="org.java.hrm.util.common.HrmConstants" %>
+<%@ taglib prefix="opertation" uri="/operation-test" %>
+
+
 
 <html>
 <head>
@@ -51,9 +55,11 @@
         </form>
     </div>
     <div class="tool_bar">
-        <div class="field">
-            <div class="input"><button class="batchDelete">批量删除</button></div>
-        </div>
+        <c:if test="${opertation:operationTest('/employee/removeEmployee?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+            <div class="field">
+                <div class="input"><button class="batchDelete">批量删除</button></div>
+            </div>
+        </c:if>
     </div>
     <%-- 展示的数据 --%>
     <div class="data_list">
@@ -121,8 +127,12 @@
                     <th>${employee.remark}</th>
 
                     <th>
-                        <a class="delete" href="/employee/removeEmployee?ids=${employee.id}">删除</a>
-                        <a class="update" href="/employee/updateEmployee?id=${employee.id}&flag=1">修改</a>
+                        <c:if test="${opertation:operationTest('/employee/removeEmployee?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                            <a class="delete" href="/employee/removeEmployee?ids=${employee.id}">删除</a>
+                        </c:if>
+                        <c:if test="${opertation:operationTest('/employee/updateEmployee?id=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                            <a class="update" href="/employee/updateEmployee?id=${employee.id}&flag=1">修改</a>
+                        </c:if>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>
