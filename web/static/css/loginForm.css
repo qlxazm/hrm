@@ -1,4 +1,6 @@
+body{background-image: url("/static/imgs/bg1.jpg");background-repeat: no-repeat;background-size: 100%}
 .field{margin-bottom: 20px;}
 .input{display: inline-block;border: 1px solid transparent;}
 .input > input{padding: 3px 8px;}
 .label{font-size: 1.5em;font-weight: 600;}
+.message{color: red;font-size: 1.2em;}

@@ -1,9 +1,13 @@
 .field{margin-bottom: 10px;}
-.input{display: inline-block;border: 1px solid transparent;}
+.input{display: inline-block;border: 1px solid transparent;max-width: 200px;}
 .input > input{padding: 3px 8px;}
-.label{font-size: 1.5em;min-width: 75px; text-align: right}
+.label{font-size: 1.5em;min-width: 75px; text-align: right; float: left;}
 .input, .label{display: inline-block}
 .message{color: #FF0000;font-size: 1.2em; font-weight: 700;}
 .error,.success{font-size: 1.5em; font-weight: 700;}
 .success{color: #00FF00;}
 .error{color: #FF0000;}
+
+.checkbox_list > span,.checkbox_list > span > label{display: inline-block}
+.checkbox_list > span > label{font-size: 1.2em; margin:0 5px}
+.checkbox_list > span > input{vertical-align: middle;}

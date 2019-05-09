@@ -18,7 +18,8 @@
     </style>
 </head>
 <body>
-<h2>添加员工信息</h2>
+<div class="breadcrumb">当前位置：<span class="nav">员工管理</span><span class="separator">/</span><span class="nav nav_active">添加员工</span></div>
+
 <%--还有这两个没填写Date create_date --%>
 <c:if test="${message.indexOf(\"成功\") >= 0}">
     <p class="success">${message}</p>

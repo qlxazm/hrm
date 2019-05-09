@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="/static/css/dataList.css"/>
 </head>
 <body>
-    <h2>部门列表</h2>
+<div class="breadcrumb">当前位置：<span class="nav">部门管理</span><span class="separator">/</span><span class="nav nav_active">部门列表</span></div>
+
     <%--工具栏--%>
     <div class="tool_bar">
         <form method="post" action="/dept/selectDept">

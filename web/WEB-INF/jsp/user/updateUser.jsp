@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/static/css/addOrUpdateCommon.css"/>
 </head>
 <body>
-<h2>用户更新</h2>
+<div class="breadcrumb">当前位置：<span class="nav">用户管理</span><span class="separator">/</span><span class="nav nav_active">更新用户</span></div>
 <c:if test="${message.indexOf(\"成功\") >= 0}">
     <p class="success">${message}</p>
 </c:if>

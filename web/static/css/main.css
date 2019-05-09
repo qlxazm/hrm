@@ -1,5 +1,9 @@
-.header{height: 80px; margin-bottom: 10px;}
+.header{height: 80px; margin-bottom: 10px;background: url("/static/imgs/header.jpg") no-repeat; background-size: 100%;}
+.header > h3, .header > a{box-sizing: border-box;height: 40px;line-height: 40px;}
+.header > h3{margin: 0 0 0 25%;display: inline-block;}
+.header > a{float: right;margin-right: 10%}
+.main_wrapper{padding: 10px 0;min-height:calc(100% - 90px);box-sizing:border-box;background: url("/static/imgs/main.jpg"); background-size: 100%;}
 .content{box-sizing: border-box; padding: 5px 20px;margin-left: 20px;display: inline-block;width: calc(100% - 140px);}
 .sideBar{box-sizing: border-box; font-size: 1.3em; font-weight: 600;display: inline-block;float: left;margin-left: 10px;}
-.sideBar, .content{border: 1px solid #CFCFCF; border-radius: 2px;min-height: calc(100% - 100px)}
+.sideBar, .content{background:#ffffff;box-shadow: 0 0 3px #333333;border: 1px solid #CFCFCF; border-radius: 2px;min-height: calc(100% - 120px)}
 

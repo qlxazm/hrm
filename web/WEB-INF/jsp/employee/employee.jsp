@@ -20,8 +20,9 @@
     <link rel="stylesheet" href="/static/css/dataList.css"/>
 </head>
 <body>
-    <h3>员工列表</h3>
-    <%-- 工具栏 --%>
+<div class="breadcrumb">当前位置：<span class="nav">员工管理</span><span class="separator">/</span><span class="nav nav_active">员工列表</span></div>
+
+<%-- 工具栏 --%>
     <div class="tool_bar">
         <form method="post" action="/employee/selectEmployee">
             <div class="field">

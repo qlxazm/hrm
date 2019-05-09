@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/static/css/addOrUpdateCommon.css"/>
 </head>
 <body>
-    <h2>添加新的角色</h2>
+<div class="breadcrumb">当前位置：<span class="nav">角色管理</span><span class="separator">/</span><span class="nav nav_active">添加角色</span></div>
     <c:if test="${message.indexOf(\"成功\") >= 0}">
         <p class="success">${message}</p>
     </c:if>
@@ -29,7 +29,7 @@
         </div>
         <div class="field">
             <span class="label">禁止的权限：</span>
-            <div class="input">
+            <div class="input checkbox_list">
                 <form:checkboxes items="${permissions}" itemValue="id" itemLabel="remark" path="permissionIds"></form:checkboxes>
             </div>
         </div>

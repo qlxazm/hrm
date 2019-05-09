@@ -12,15 +12,16 @@
     <link rel="stylesheet" href="/static/css/main.css"/>
     <link rel="stylesheet" href="/static/css/menu.css"/>
     <link rel="stylesheet" href="/static/css/pagination.css"/>
+    <link rel="stylesheet" href="/static/css/breadcrumb.css"/>
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/menu.js"></script>
 </head>
 <body>
     <div class="header">
         <h3>当前用户是：[${sessionScope[HrmConstants.USER_SESSION].username}]</h3>
-        <a href="/logout" style="font-size: 1.4em">注销</a>
+        <a href="/logout" style="font-size: 1.4em">退出</a>
     </div>
-    <div>
+    <div class="main_wrapper">
         <div class="sideBar">
             <ul class="menu">
                 <li><a href="javascript:void(0)">用户管理</a></li>

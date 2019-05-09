@@ -1,0 +1,4 @@
+.breadcrumb{font-size: 1.4em;font-weight: 700;margin-bottom: 10px;}
+.breadcrumb .nav{display: inline-block;box-sizing: border-box;padding: 0 5px;}
+.breadcrumb .separator{color: #AAAAAA;}
+.breadcrumb .nav_active{color: #AAAAAA}
