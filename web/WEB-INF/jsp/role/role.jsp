@@ -28,13 +28,14 @@
             </div>
         </form>
     </div>
+    --%>
     <div class="tool_bar">
-        <c:if test="${opertation:operationTest('/dept/removeDept', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+        <c:if test="${opertation:operationTest('/role/removeRole', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
             <div class="field">
                 <div class="input"><button class="batchDelete">批量删除</button></div>
             </div>
         </c:if>
-    </div>--%>
+    </div>
     <%--内容栏--%>
     <div class="data_list">
         <table border="1">
@@ -71,9 +72,9 @@
             pageIndex="${pageModel.pageIndex}"
             pageSize="${pageModel.pageSize}"
             recordCount="${pageModel.recordCount}"/>
-    <%--<form method="post" action="/dept/removeDept" style="display: none;">
+    <form method="post" action="/dept/removeDept" style="display: none;">
         <input type="text" class="delete_ids" name="ids"/>
         <input type="submit" class="delete_btn">
-    </form>--%>
+    </form>
 </body>
 </html>

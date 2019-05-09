@@ -39,8 +39,16 @@
                 <li><a href="javascript:void(0)">角色管理</a></li>
                 <li>
                     <ul class="sub_menu">
-                        <li><a href="/role/selectRole">角色查询</a></li>
-                        <li><a href="#">添加角色</a></li>
+                        <li>
+                            <c:if test="${opertation:operationTest('/role/selectRole', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                                <a href="/role/selectRole">角色查询</a>
+                            </c:if>
+                        </li>
+                        <li>
+                            <c:if test="${opertation:operationTest('/role/addRole?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                                <a href="/role/addRole?flag=1">添加角色</a>
+                            </c:if>
+                        </li>
                     </ul>
                 </li>
             </ul>

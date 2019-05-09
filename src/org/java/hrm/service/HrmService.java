@@ -2,6 +2,7 @@ package org.java.hrm.service;
 
 import org.java.hrm.dao.JobDao;
 import org.java.hrm.dao.OperationDao;
+import org.java.hrm.dao.PermissionDao;
 import org.java.hrm.domain.*;
 import org.java.hrm.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,7 +148,7 @@ public interface HrmService {
     List<Job> findAllJob();
 
 
-    /*========================================  用户权限部分  =================================*/
+    /*========================================  用户权限操作部分  =================================*/
 
 
     List<Operation> selectOperationByUid(Integer id);
@@ -171,13 +172,32 @@ public interface HrmService {
 
 
     /**
-     * 珊瑚角色
+     * 删除角色
      * @param ids
      */
     void removeRole(String ids);
 
+    /**
+     * 添加角色
+     * @param role
+     */
+    void addRole(Role role);
+
+    /**
+     * 更新角色信息
+     * @param role
+     */
+    void modifyRole(Role role);
     /*==========================================      用户角色中间表      =============================*/
 
     void addUserRole(UserRole userRole);
+
+    Role selectRoleById(Integer id);
+
+
+    /*==========================================   权限Permission部分 ===========================*/
+
+   List<Permission> selectAllPermission();
+
 
 }

@@ -330,13 +330,47 @@ public class HrmServiceImpl implements HrmService {
         return roleDao.selectByPage(params);
     }
 
-
+    /**
+     * 删除角色
+     * @param ids
+     */
     @Transactional
     @Override
     public void removeRole(String ids) {
         for (String id : ids.split(",")) {
             roleDao.deleteRolePermissionByRoleId(Integer.parseInt(id));
             roleDao.deleteById(Integer.parseInt(id));
+        }
+    }
+
+    /**
+     * 添加角色
+     * @param role
+     */
+    @Transactional
+    @Override
+    public void addRole(Role role) {
+        roleDao.addRole(role);
+        for (String permissionId : role.getPermissionIds()) {
+            roleDao.addRolePermission(role.getId(), Integer.parseInt(permissionId));
+        }
+    }
+
+    /**
+     * 更新角色信息
+     * @param role
+     */
+    @Transactional
+    @Override
+    public void modifyRole(Role role) {
+        /** 先删除中间表中关于角色的信息 */
+        roleDao.deleteRolePermissionByRoleId(role.getId());
+        /** 再更新角色信息*/
+        roleDao.update(role);
+        /** 最后更新中间表 */
+        System.out.println("新的角色id: ");
+        for (String permissionId : role.getPermissionIds()) {
+            roleDao.addRolePermission(role.getId(), Integer.parseInt(permissionId));
         }
     }
 
@@ -349,5 +383,26 @@ public class HrmServiceImpl implements HrmService {
     @Override
     public void addUserRole(UserRole userRole) {
         userRoleDao.save(userRole);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Role selectRoleById(Integer id) {
+        return roleDao.selectById(id);
+    }
+
+    /*==========================================   权限Permission部分 ===========================*/
+
+    @Autowired
+    private PermissionDao permissionDao;
+
+    /**
+     * 查询所有权限
+     * @return
+     */
+    @Transactional(readOnly = true)
+    @Override
+    public List<Permission> selectAllPermission() {
+        return permissionDao.selectAll();
     }
 }

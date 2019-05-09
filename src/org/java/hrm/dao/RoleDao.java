@@ -1,9 +1,7 @@
 package org.java.hrm.dao;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 import org.java.hrm.dao.provider.RoleDynaSqlProvider;
 import org.java.hrm.domain.Role;
 
@@ -60,4 +58,45 @@ public interface RoleDao {
      */
     @SelectProvider(type = RoleDynaSqlProvider.class, method = "selectWithUserId")
     List<Role> selectWithUserId(@Param("id") Integer id);
+
+    /**
+     * 插入新的角色
+     * @param role
+     */
+    @Insert("INSERT INTO " + ROLETABLE + "(name) VALUES(#{name})")
+    @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
+    void addRole(Role role);
+
+
+    /**
+     * 新建角色时向role-permision中间表插入数据
+     * @param roleid
+     * @param permissionid
+     */
+    @Insert("INSERT INTO " + ROLEPERMISSIONTABLE + " VALUES(#{roleid}, #{permissionid})")
+    void addRolePermission(@Param("roleid") Integer roleid, @Param("permissionid") Integer permissionid);
+
+    /**
+     * 根据id查询角色信息
+     * @param id
+     * @return
+     */
+    @Select("SELECT * FROM " + ROLETABLE + " WHERE id=#{id}")
+    @Results({
+            @Result(id = true, column = "id", property = "id"),
+            @Result(column = "name", property = "name"),
+            @Result(column = "id", property = "permissionIds",
+            many = @Many(
+                    select = "org.java.hrm.dao.PermissionDao.seletcByRoleId",
+                    fetchType = FetchType.LAZY
+            ))
+    })
+    Role selectById(@Param("id") Integer id);
+
+    /**
+     * 更新角色信息
+     * @param role
+     */
+    @Update("UPDATE " + ROLETABLE + " SET name=#{name} WHERE id = #{id} ")
+    void update(Role role);
 }
