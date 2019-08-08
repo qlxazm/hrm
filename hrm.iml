@@ -34,5 +34,7 @@
     <orderEntry type="library" name="javax.servlet.jsp.jstl-1.2.1" level="project" />
     <orderEntry type="library" name="hamcrest-all-1.3" level="project" />
     <orderEntry type="library" name="hibernate-validator-6.0.16.Final" level="project" />
+    <orderEntry type="library" name="jackson-annotations-2.9.8" level="project" />
+    <orderEntry type="library" name="spring-webflow-2.4.0.RELEASE" level="project" />
   </component>
 </module>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AuthorizedInterceptor implements HandlerInterceptor {
     //定义不需要拦截的页面
-    private static final String[] IGNORE_URL = {"/loginForm", "/login", "/404.html"};
+    private static final String[] IGNORE_URL = {"/loginForm", "/login", "/404.jsp"};
 
     /**
      * 这个方法在执行Controller中的方法之前执行，

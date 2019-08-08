@@ -8,7 +8,8 @@
 .data_list{margin-bottom: 10px;}
 .data_list th{font-weight: normal;padding: 2px 8px;text-align: center;border: 1px solid #AAAAAA;color: #606266}
 .data_list table tr:first-child th{font-weight: 600;color: #303133;}
-.data_list table tr th .delete,.data_list table tr th .undelete, .data_list table tr th .update{display: inline-block; box-sizing: border-box; padding: 2px 8px; font-size: .8em; color: #ffffff; border-radius: 2px;}
+.data_list table tr th .delete,.data_list table tr th .detail,.data_list table tr th .undelete, .data_list table tr th .update{display: inline-block; box-sizing: border-box; padding: 2px 8px; font-size: .8em; color: #ffffff; border-radius: 2px;}
 .data_list table tr th .delete{background-color: #F56C6C}
 .data_list table tr th .update{background-color: #67C23A}
-.data_list table tr th .undelete{background-color: #909399}
+.data_list table tr th .detail{background-color: #909399}
+.data_list table tr th .undelete{background-color: #E6A23C}

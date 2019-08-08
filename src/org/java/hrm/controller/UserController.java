@@ -177,29 +177,23 @@ public class UserController {
         System.out.println("/user/addUser -- >> " + user);
         String message = "";
 
-        try{
-            if (flag.equals("2")){
-                if (!errors.hasErrors()) {
-                    hrmService.addUser(user);
-                    message = "添加用户成功！";
-                }
-            }
-        }catch (Exception e){
-            message = "添加用户失败！";
-        }finally {
-            List<Role> roles = new ArrayList<>();
-            try{
-                roles = hrmService.selectAllRole();
-            }catch (Exception e) {
-                message = "加载角色信息失败！";
-            }finally {
-                mv.addObject("roles", roles);
-                mv.addObject("message", message);
-                mv.addObject("page", "user/addUser.jsp");
-                mv.setViewName("main");
-                return mv;
+        if (flag.equals("2")){
+            if (!errors.hasErrors()) {
+                hrmService.addUser(user);
+                message = "添加用户成功！";
             }
         }
+
+        List<Role> roles = new ArrayList<>();
+        roles = hrmService.selectAllRole();
+        if (roles.size() == 0) {
+            message = "查询系统角色列表失败！";
+        }
+        mv.addObject("roles", roles);
+        mv.addObject("message", message);
+        mv.addObject("page", "user/addUser.jsp");
+        mv.setViewName("main");
+        return mv;
     }
 
     /**

@@ -2,6 +2,8 @@ package org.java.hrm.service.impl;
 
 import org.java.hrm.dao.*;
 import org.java.hrm.domain.*;
+import org.java.hrm.myException.AddUserException;
+import org.java.hrm.myException.SelectRoleException;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,14 +67,17 @@ public class HrmServiceImpl implements HrmService {
      */
     @Transactional
     @Override
-    public void addUser(User user) {
-        userDao.save(user);
-        /**储存用户的角色信息*/
-        UserRole userRole = new UserRole();
-        for (String roleId : user.getRole_ids().split(",")) {
-            userRole.setRoleid(Integer.parseInt(roleId));
-            userRole.setUserid(user.getId());
-            addUserRole(userRole);
+    public void addUser(User user) throws AddUserException{
+        try {
+            userDao.save(user);
+            UserRole userRole = new UserRole();
+            for (String roleId : user.getRole_ids().split(",")) {
+                userRole.setRoleid(Integer.parseInt(roleId));
+                userRole.setUserid(user.getId());
+                addUserRole(userRole);
+            }
+        } catch (Exception exception) {
+            throw new AddUserException();
         }
     }
 
@@ -305,8 +311,13 @@ public class HrmServiceImpl implements HrmService {
      */
     @Transactional(readOnly = true)
     @Override
-    public List<Role> selectAllRole() {
-        return roleDao.selectAll();
+    public List<Role> selectAllRole(){
+        List<Role> roles = new ArrayList<>();
+        try {
+            roles = roleDao.selectAll();
+        }catch (Exception exception) { } finally {
+            return roles;
+        }
     }
 
 

@@ -1,5 +1,6 @@
 package org.java.hrm.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.java.hrm.domain.Dept;
 import org.java.hrm.domain.Employee;
 import org.java.hrm.domain.Job;
@@ -9,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.validation.Errors;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -141,5 +144,24 @@ public class EmployeeController {
         mv.addObject("page", "employee/updateEmployee.jsp");
         mv.setViewName("main");
         return mv;
+    }
+
+    /**
+     * 查看员工详情
+     * @param employee
+     * @param response
+     */
+    @RequestMapping(value = "/employee/detailEmployee")
+    public void detailEmployee(@RequestBody Employee employee,
+                               HttpServletResponse response) throws Exception{
+        response.setContentType("application/json; charset=utf-8");
+        employee = hrmService.findEmployeeById(employee.getId());
+        ObjectMapper objectMapper = new ObjectMapper();
+
+
+        /** 将查询到的员工对象返回 */
+        String data = objectMapper.writeValueAsString(employee);
+        String result = "{code: 0, data:" + data + "}";
+        response.getWriter().println(data);
     }
 }

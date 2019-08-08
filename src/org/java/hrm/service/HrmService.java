@@ -4,6 +4,8 @@ import org.java.hrm.dao.JobDao;
 import org.java.hrm.dao.OperationDao;
 import org.java.hrm.dao.PermissionDao;
 import org.java.hrm.domain.*;
+import org.java.hrm.myException.AddUserException;
+import org.java.hrm.myException.SelectRoleException;
 import org.java.hrm.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,7 +45,7 @@ public interface HrmService {
      * @param user
      * @return
      */
-    void addUser(User user);
+    void addUser(User user) throws AddUserException;
 
     /**
      * 根据id删除用户

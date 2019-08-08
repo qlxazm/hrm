@@ -18,6 +18,7 @@
 <head>
     <title>员工页面</title>
     <link rel="stylesheet" href="/static/css/dataList.css"/>
+    <link rel="stylesheet" href="/static/css/detailDialog.css"/>
 </head>
 <body>
 <div class="breadcrumb">当前位置：<span class="nav">员工管理</span><span class="separator">/</span><span class="nav nav_active">员工列表</span></div>
@@ -68,38 +69,36 @@
             <tr>
                 <th><input type="checkbox" class="selectAll"/></th>
                 <th>序号</th>
-                <th>部门</th>
-                <th>职位</th>
                 <th>姓名</th>
-                <th>身份证</th>
+                <th>职位</th>
+                <th>部门</th>
+                <th>性别</th>
+                <th>手机</th>
+                <th>邮箱</th>
+                <th>生日</th>
+                <th>教育背景</th>
+                <th>操作</th>
+
+                <%--<th>身份证</th>
                 <th>地址</th>
                 <th>邮编</th>
                 <th>电话</th>
                 <th>手机</th>
                 <th>QQ</th>
-                <th>邮箱</th>
-                <th>性别</th>
-                <th>党派</th>
-                <th>生日</th>
-                <th>民族</th>
-                <th>教育背景</th>
-                <th>特长</th>
-                <th>爱好</th>
+
                 <th>描述</th>
-                <th>操作</th>
+
+                <th>党派</th>
+                <th>民族</th>
+                <th>特长</th>
+                <th>爱好</th>--%>
             </tr>
             <c:set value="1" var="index"/>
             <c:forEach items="${employees}" var="employee">
                 <tr>
                     <th><input type="checkbox" name="category" data-id="${employee.id}"/></th>
                     <th>${index}</th>
-                    <th>
-                        <c:forEach items="${depts}" var="dept">
-                            <c:if test="${dept.id == employee.dept_id}">
-                                ${dept.name}
-                            </c:if>
-                        </c:forEach>
-                    </th>
+                    <th>${employee.name}</th>
                     <th>
                         <c:forEach items="${jobs}" var="job">
                             <c:if test="${job.id == employee.job_id}">
@@ -107,25 +106,30 @@
                             </c:if>
                         </c:forEach>
                     </th>
-                    <th>${employee.name}</th>
-                    <th>${employee.card_id}</th>
-                    <th>${employee.address}</th>
-                    <th>${employee.post_code}</th>
-                    <th>${employee.tel}</th>
-                    <th>${employee.phone}</th>
-                    <th>${employee.QQ_num}</th>
-                    <th>${employee.email}</th>
-                    <th>${employee.sex}</th>
-                    <th>${employee.party}</th>
                     <th>
-                            <%--${employee.birthday}--%>
+                        <c:forEach items="${depts}" var="dept">
+                            <c:if test="${dept.id == employee.dept_id}">
+                                ${dept.name}
+                            </c:if>
+                        </c:forEach>
+                    </th>
+                    <th>${employee.sex}</th>
+                   <%-- <th>${employee.card_id}</th>--%>
+                   <%-- <th>${employee.address}</th>--%>
+                  <%--  <th>${employee.post_code}</th>--%>
+                   <%-- <th>${employee.tel}</th>--%>
+                    <th>${employee.phone}</th>
+                   <%-- <th>${employee.QQ_num}</th>--%>
+                    <th>${employee.email}</th>
+                    <%--<th>${employee.party}</th>--%>
+                    <th>
                        <fmt:formatDate type="date" value="${employee.birthday}" />
                     </th>
-                    <th>${employee.race}</th>
+                    <%--<th>${employee.race}</th>--%>
                     <th>${employee.education}</th>
-                    <th>${employee.speciality}</th>
-                    <th>${employee.hobby}</th>
-                    <th>${employee.remark}</th>
+                   <%-- <th>${employee.speciality}</th>
+                    <th>${employee.hobby}</th>--%>
+                    <%--<th>${employee.remark}</th>--%>
 
                     <th>
                         <c:if test="${opertation:operationTest('/employee/removeEmployee?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
@@ -134,6 +138,7 @@
                         <c:if test="${opertation:operationTest('/employee/updateEmployee?id=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                             <a class="update" href="/employee/updateEmployee?id=${employee.id}&flag=1">修改</a>
                         </c:if>
+                        <a class="detail" data-id="${employee.id}" href="javascript:void(0)">详情</a>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>
@@ -150,6 +155,14 @@
         <input type="text" class="delete_ids" name="ids"/>
         <input type="submit" class="delete_btn">
     </form>
+
+    <div class="dialog_detail">
+        <div class="dialog_content">
+            <div class="dialog_header"><span class="dialog_close">X</span></div>
+        </div>
+    </div>
+
 </body>
 <script src="/static/js/deleteItems.js"></script>
+<script src="/static/js/detailDialog.js"></script>
 </html>

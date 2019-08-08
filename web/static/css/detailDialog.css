@@ -1,0 +1,7 @@
+.content{position: relative}
+.dialog_detail{display:none;box-sizing: border-box;padding:20px;position: absolute;left: 0;top:0;right: 0;bottom: 0;background-color: rgba(0,0,0,.7)}
+.dialog_content{box-sizing: border-box; background-color: rgba(255,255,255,1); height: 80%;margin: 10px 15%}
+
+.dialog_header{height: 40px;}
+.dialog_close{cursor:pointer;float: right;margin: 5px 15px 0 0; height: 16px;width: 16px; border-radius: 8px;border: 1px solid #CCCCCC; color: #666666; text-align: center;line-height: 16px;}
+.dialog_close:hover{background-color: #AAAAAA; color: #ffffff}
