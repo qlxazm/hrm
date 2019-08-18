@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="opertation" uri="/operation-test" %>
 <%@ taglib prefix="page" uri="/pager-tags" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+
 <%--
   Created by IntelliJ IDEA.
   User: qlxazm
@@ -55,13 +57,21 @@
                     <th>${index}</th>
                     <th>${role.name}</th>
                     <th>
-                        <c:if test="${opertation:operationTest('/role/removeRole?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                            <security:authorize url="/role/removeRole">
+                                <a class="delete" href="/role/removeRole?ids=${role.id}">删除</a>
+                            </security:authorize>
+
+                        <security:authorize url="/role/updateRole">
+                            <a class="update" href="/role/updateRole?id=${role.id}&flag=1">修改</a>
+
+                        </security:authorize>
+                       <%-- <c:if test="${opertation:operationTest('/role/removeRole?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                             <a class="delete" href="/role/removeRole?ids=${role.id}">删除</a>
                         </c:if>
 
                         <c:if test="${opertation:operationTest('/role/updateRole?id=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                             <a class="update" href="/role/updateRole?id=${role.id}&flag=1">修改</a>
-                        </c:if>
+                        </c:if>--%>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>

@@ -32,6 +32,15 @@ public class UserController {
     private HrmService hrmService;
 
     /**
+     * 直接显示登陆页面
+     * @return
+     */
+    @RequestMapping(value = "/hello")
+    public String hello() {
+        return "loginForm";
+    }
+
+    /**
      * 更新用户信息
      * @param flag
      * @param mv
@@ -96,18 +105,20 @@ public class UserController {
 
     /**
      * 用户登录
+     * 使用spring security之后就根本没有走这个
      * @param loginname
      * @param password
      * @param session
      * @param mv
      * @return
      */
-    @RequestMapping(value = "/login")
-    public ModelAndView login(@RequestParam("loginname") String loginname,
+    @RequestMapping(value = "/loginSecurity")
+    public ModelAndView login(@RequestParam("username") String loginname,
                               @RequestParam("password") String password,
                               HttpSession session,
                               ModelAndView mv){
         User user = hrmService.login(loginname, password);
+        System.out.println("在这里进行登录...." + loginname + "======" + password);
         if (user != null) {
             List<Operation> operations = hrmService.selectOperationByUid(user.getId());
             session.setAttribute(HrmConstants.USER_OPERATION_SESSION, operations);

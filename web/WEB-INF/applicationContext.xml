@@ -19,6 +19,7 @@
     <!--mybatis:scan会扫描org.java.hrm.dao包里面的所有接口当作spring的bean配置，之后可以进行依赖注入-->
     <mybatis:scan base-package="org.java.hrm.dao"/>
 
+    <!--开启自动扫描-->
     <context:component-scan base-package="org.java.hrm"/>
 
     <context:property-override location="classpath:db.properties"/>

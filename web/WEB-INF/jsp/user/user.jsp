@@ -11,6 +11,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="org.java.hrm.util.common.HrmConstants" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+
 
 <html>
 <head>
@@ -85,12 +87,18 @@
                         <fmt:formatDate type="date" value="${user.createdate}" />
                     </th>
                     <th>
-                        <c:if test="${opertation:operationTest('/user/removeUser?ids='.concat(user.id), sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                        <security:authorize url="/user/removeUser">
+                            <a class="delete" href="/user/removeUser?ids=${user.id}">删除</a>
+                        </security:authorize>
+                        <security:authorize url="/user/updateUser">
+                            <a class="update" href="/user/updateUser?id=${user.id}&flag=1">修改</a>
+                        </security:authorize>
+                       <%-- <c:if test="${opertation:operationTest('/user/removeUser?ids='.concat(user.id), sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                             <a class="delete" href="/user/removeUser?ids=${user.id}">删除</a>
                         </c:if>
                         <c:if test="${opertation:operationTest('/user/updateUser?id='.concat(user.id), sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                             <a class="update" href="/user/updateUser?id=${user.id}&flag=1">修改</a>
-                        </c:if>
+                        </c:if>--%>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>

@@ -55,6 +55,19 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--使用spring security需要的filter-->
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>
+            org.springframework.web.filter.DelegatingFilterProxy
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <jsp-config>
         <jsp-property-group>
             <!--指示当前关于jsp的配置组适用于所有哪些jsp页面，在这里是试用于所有jsp页面-->

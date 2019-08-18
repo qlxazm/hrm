@@ -3,6 +3,7 @@
 <%@ page import="org.java.hrm.util.common.HrmConstants" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="opertation" uri="/operation-test" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <html>
 <head>
@@ -18,7 +19,10 @@
 </head>
 <body>
     <div class="header">
-        <h3>当前用户是：[${sessionScope[HrmConstants.USER_SESSION].username}]</h3>
+       <%-- <h3>当前用户是：[${sessionScope[HrmConstants.USER_SESSION].username}]</h3>--%>
+        <h3>使用spring security后显示的当前用户是：
+            <security:authentication property="principal.username"/>
+        </h3>
         <a href="/logout" style="font-size: 1.4em">退出</a>
     </div>
     <div class="main_wrapper">
@@ -29,9 +33,13 @@
                     <ul class="sub_menu">
                         <li><a href="/user/selectUser">用户查询</a></li>
                         <li>
+                            <security:authorize url="/user/addUser" >
+                                <a href="/user/addUser?flag=1">添加用户</a>
+                            </security:authorize>
+<%--
                             <c:if test="${opertation:operationTest('/user/addUser?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                                 <a href="/user/addUser?flag=1">添加用户</a>
-                            </c:if>
+                            </c:if>--%>
                         </li>
                     </ul>
                 </li>
@@ -41,14 +49,21 @@
                 <li>
                     <ul class="sub_menu">
                         <li>
-                            <c:if test="${opertation:operationTest('/role/selectRole', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                            <a href="/role/selectRole">角色查询</a>
+
+                          <%--  <c:if test="${opertation:operationTest('/role/selectRole', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                                 <a href="/role/selectRole">角色查询</a>
-                            </c:if>
+                            </c:if>--%>
                         </li>
                         <li>
-                            <c:if test="${opertation:operationTest('/role/addRole?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                            <security:authorize url="/role/addRole" >
                                 <a href="/role/addRole?flag=1">添加角色</a>
-                            </c:if>
+                            </security:authorize>
+
+
+                         <%--   <c:if test="${opertation:operationTest('/role/addRole?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                                <a href="/role/addRole?flag=1">添加角色</a>
+                            </c:if>--%>
                         </li>
                     </ul>
                 </li>
@@ -59,9 +74,12 @@
                     <ul class="sub_menu">
                         <li><a href="/dept/selectDept">部门查询</a></li>
                         <li>
-                            <c:if test="${opertation:operationTest('/dept/addDept?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                            <security:authorize url="/dept/addDept">
                                 <a href="/dept/addDept?flag=1">添加部门</a>
-                            </c:if>
+                            </security:authorize>
+                          <%--  <c:if test="${opertation:operationTest('/dept/addDept?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                                <a href="/dept/addDept?flag=1">添加部门</a>
+                            </c:if>--%>
                         </li>
                     </ul>
                 </li>
@@ -72,9 +90,12 @@
                     <ul class="sub_menu">
                         <li><a href="/employee/selectEmployee">员工查询</a></li>
                         <li>
-                            <c:if test="${opertation:operationTest('/employee/addEmployee?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                            <security:authorize url="/employee/addEmployee">
                                 <a href="/employee/addEmployee?flag=1">添加员工</a>
-                            </c:if>
+                            </security:authorize>
+                          <%--  <c:if test="${opertation:operationTest('/employee/addEmployee?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                                <a href="/employee/addEmployee?flag=1">添加员工</a>
+                            </c:if>--%>
                         </li>
                     </ul>
                 </li>

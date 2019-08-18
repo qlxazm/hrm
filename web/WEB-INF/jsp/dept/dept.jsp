@@ -2,6 +2,8 @@
 <%@ taglib prefix="page" uri="/pager-tags" %>
 <%@ page import="org.java.hrm.util.common.HrmConstants" %>
 <%@ taglib prefix="opertation" uri="/operation-test" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+
 
 
 <%--
@@ -34,11 +36,16 @@
         </form>
     </div>
     <div class="tool_bar">
-        <c:if test="${opertation:operationTest('/dept/removeDept', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+        <security:authorize url="/dept/removeDept">
             <div class="field">
                 <div class="input"><button class="batchDelete">批量删除</button></div>
             </div>
-        </c:if>
+        </security:authorize>
+       <%-- <c:if test="${opertation:operationTest('/dept/removeDept', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+            <div class="field">
+                <div class="input"><button class="batchDelete">批量删除</button></div>
+            </div>
+        </c:if>--%>
     </div>
     <%--内容栏--%>
     <div class="data_list">
@@ -65,7 +72,14 @@
                     <th>${dept.name}</th>
                     <th>${dept.remark}</th>
                     <th>
-                        <c:if test="${dept.employeeNum > 0 && opertation:operationTest('/dept/removeDept?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                        <security:authorize url="/dept/removeDept">
+                            <a class="delete" href="/dept/removeDept?ids=${dept.id}">删除</a>
+                        </security:authorize>
+                        <security:authorize url="/dept/updateDept">
+                            <a class="update" href="/dept/updateDept?id=${dept.id}&flag=1">修改</a>
+                        </security:authorize>
+
+                    <%-- <c:if test="${dept.employeeNum > 0 && opertation:operationTest('/dept/removeDept?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                             <a class="undelete" href="#">不可删除</a>
                         </c:if>
                         <c:if test="${dept.employeeNum == 0 && opertation:operationTest('/dept/removeDept?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
@@ -74,7 +88,7 @@
 
                         <c:if test="${opertation:operationTest('/dept/updateDept?id=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                             <a class="update" href="/dept/updateDept?id=${dept.id}&flag=1">修改</a>
-                        </c:if>
+                        </c:if>--%>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>

@@ -11,6 +11,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="org.java.hrm.util.common.HrmConstants" %>
 <%@ taglib prefix="opertation" uri="/operation-test" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 
 
@@ -132,13 +133,20 @@
                     <%--<th>${employee.remark}</th>--%>
 
                     <th>
-                        <c:if test="${opertation:operationTest('/employee/removeEmployee?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
+                        <security:authorize url="/employee/removeEmployee">
+                            <a class="delete" href="/employee/removeEmployee?ids=${employee.id}">删除</a>
+                        </security:authorize>
+                        <security:authorize url="/employee/updateEmployee">
+                            <a class="update" href="/employee/updateEmployee?id=${employee.id}&flag=1">修改</a>
+                        </security:authorize>
+                        <a class="detail" data-id="${employee.id}" href="javascript:void(0)">详情</a>
+                    <%-- <c:if test="${opertation:operationTest('/employee/removeEmployee?ids=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                             <a class="delete" href="/employee/removeEmployee?ids=${employee.id}">删除</a>
                         </c:if>
                         <c:if test="${opertation:operationTest('/employee/updateEmployee?id=', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                             <a class="update" href="/employee/updateEmployee?id=${employee.id}&flag=1">修改</a>
                         </c:if>
-                        <a class="detail" data-id="${employee.id}" href="javascript:void(0)">详情</a>
+                        <a class="detail" data-id="${employee.id}" href="javascript:void(0)">详情</a>--%>
                     </th>
                 </tr>
                 <c:set var="index" value="${index + 1}"/>

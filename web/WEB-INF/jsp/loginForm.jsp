@@ -16,10 +16,10 @@
 </head>
 <body>
     <div class="input_form center_XY">
-        <form action="login" method="post">
+        <form action="/loginSecurity" method="post">
             <div class="field">
                 <span class="label">用户名：</span>
-                <div class="input"><input type="text" name="loginname"/></div>
+                <div class="input"><input type="text" name="username"/></div>
             </div>
             <div class="field">
                 <span class="label">密&nbsp;&nbsp;&nbsp;码：</span>
@@ -27,6 +27,10 @@
                     <input type="password" name="password">
                 </div>
                 <p class="message">${message}</p>
+            </div>
+            <div class="field">
+                <span class="label">自动登录：</span>
+                <div class="input login"><input name="remember_me" type="checkbox"/></div>
             </div>
             <div class="field">
                 <span class="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>

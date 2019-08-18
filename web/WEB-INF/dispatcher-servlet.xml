@@ -24,7 +24,7 @@
     <!--<mvc:default-servlet-handler/>-->
 
     <!--配置拦截器-->
-    <mvc:interceptors>
+   <!-- <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="org.java.hrm.interceptor.AuthorizedInterceptor"/>
@@ -33,7 +33,7 @@
             <mvc:mapping path="/**"/>
             <bean class="org.java.hrm.interceptor.OperationInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
 
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
