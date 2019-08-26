@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="/static/css/breadcrumb.css"/>
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/menu.js"></script>
+    <script src="/static/js/sockjs.min.js"></script>
+    <script src="/static/js/stomp.min.js"></script>
+    <script src="/static/js/stompMessage.js"></script>
 </head>
 <body>
     <div class="header">
@@ -23,6 +26,9 @@
         <h3>使用spring security后显示的当前用户是：
             <security:authentication property="principal.username"/>
         </h3>
+           <a href="/sendMessage?message=这是一条发往所有用户的消息">开始向所有用户发送消息</a>
+           <a href="/sendMessageToManager?message=这是给管理员的一条信息">开始向管理员发送消息</a>
+           <a href="/sendMessageToUser?message=这是给普通用户的一条信息">开始向用户发送消息</a>
         <a href="/logout" style="font-size: 1.4em">退出</a>
     </div>
     <div class="main_wrapper">

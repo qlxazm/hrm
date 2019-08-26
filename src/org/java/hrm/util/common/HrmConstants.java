@@ -8,6 +8,8 @@ public class HrmConstants {
     public static final String EMPLOYEETABLE = "employee_inf";
     public static final String NOTICETABLE = "notice_inf";
     public static final String DOCUMENTTABLE = "document_inf";
+    public static final String MESSAGETABLE = "messages";
+    public static final String USERMESSAGETABLE = "user_message";
     //关于用户权限控制的表
     public static final String ROLETABLE = "rbac_role";
     public static final String PERMISSIONTABLE = "rbac_permission";

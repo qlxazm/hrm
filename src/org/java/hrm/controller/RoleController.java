@@ -1,10 +1,8 @@
 package org.java.hrm.controller;
 
-import org.apache.ibatis.annotations.Result;
 import org.java.hrm.domain.Permission;
 import org.java.hrm.domain.Role;
 import org.java.hrm.service.HrmService;
-import org.java.hrm.util.common.HrmConstants;
 import org.java.hrm.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

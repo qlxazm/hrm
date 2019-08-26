@@ -5,6 +5,7 @@ import org.java.hrm.domain.User;
 
 import static org.java.hrm.util.common.HrmConstants.USERTABLE;
 
+import java.util.Date;
 import java.util.Map;
 
 public class UserDynaSqlProvider {
@@ -91,6 +92,17 @@ public class UserDynaSqlProvider {
                     SET(" userstatus = #{userstatus} ");
                 }
                 WHERE("id = #{id}");
+            }
+        }.toString();
+        return sql;
+    }
+
+    public String updateLoginTime(String username) {
+        String sql = new SQL(){
+            {
+                UPDATE(USERTABLE);
+                SET(" lastLoginTime = " + new Date());
+                WHERE("username = ${username}");
             }
         }.toString();
         return sql;

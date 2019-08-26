@@ -24,6 +24,9 @@
 
     <context:property-override location="classpath:db.properties"/>
 
+    <!--配置启用STOMP消息功能-->
+    <bean class="org.java.hrm.websocket.WebSocketStompConfig"/>
+
     <!--配置c3p0数据源-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" />
 

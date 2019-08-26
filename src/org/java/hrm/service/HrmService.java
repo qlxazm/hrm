@@ -47,6 +47,7 @@ public interface HrmService {
      */
     void addUser(User user) throws AddUserException;
 
+
     /**
      * 根据id删除用户
      * @param ids
@@ -58,6 +59,8 @@ public interface HrmService {
      * @param user
      */
     void modifyUser(User user);
+
+    void modifyLoginTime(String userName);
 
 
     /* ========================   部门部分  =========================== */
@@ -200,6 +203,7 @@ public interface HrmService {
     /*==========================================   权限Permission部分 ===========================*/
 
    List<Permission> selectAllPermission();
-
+    /*==========================================   系统消息   ====================================*/
+    void addMessage(Message message);
 
 }

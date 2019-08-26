@@ -61,6 +61,15 @@ public class HrmServiceImpl implements HrmService {
     }
 
     /**
+     * 更新用户的登录时间
+     * @param userName
+     */
+    @Override
+    public void modifyLoginTime(String userName) {
+        userDao.updateLoginTime(userName);
+    }
+
+    /**
      * 添加新用户
      * @param user
      * @return
@@ -415,5 +424,14 @@ public class HrmServiceImpl implements HrmService {
     @Override
     public List<Permission> selectAllPermission() {
         return permissionDao.selectAll();
+    }
+
+    /*=========================================   系统消息 ====================================*/
+    @Autowired
+    private MessageDao messageDao;
+
+    @Override
+    public void addMessage(Message message) {
+        messageDao.save(message);
     }
 }

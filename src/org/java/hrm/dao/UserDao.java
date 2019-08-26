@@ -5,6 +5,7 @@ import org.apache.ibatis.mapping.FetchType;
 import org.java.hrm.dao.provider.UserDynaSqlProvider;
 import org.java.hrm.domain.User;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -92,4 +93,11 @@ public interface UserDao {
      */
     @UpdateProvider(type = UserDynaSqlProvider.class, method = "updateUser")
     void update(User user);
+
+    /**
+     * 更新用户的登录时间
+     * @param username
+     */
+    @Update("UPDATE " + USERTABLE + " SET lastLoginTime = current_timestamp WHERE username = #{username}")
+    void updateLoginTime(@Param("username") String username);
 }

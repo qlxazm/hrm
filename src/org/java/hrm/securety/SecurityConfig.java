@@ -1,5 +1,6 @@
 package org.java.hrm.securety;
 
+import org.java.hrm.util.LoginSuccessHandler;
 import org.java.hrm.util.common.HrmConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +20,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     @Qualifier("dataSource")
     DataSource dataSource;
+
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -42,7 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .loginPage("/hello") // 自定义登录页面
             .loginProcessingUrl("/loginSecurity") // 自定义登录路径
             .failureUrl("/500")
-            .defaultSuccessUrl("/main")
+            //.defaultSuccessUrl("/main")
+            .successHandler(loginSuccessHandler)
             .and()
             .rememberMe() // 开启rememberMe功能
             .tokenValiditySeconds(2419200)
