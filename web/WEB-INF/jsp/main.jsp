@@ -29,6 +29,7 @@
            <a href="/sendMessage?message=这是一条发往所有用户的消息">开始向所有用户发送消息</a>
            <a href="/sendMessageToManager?message=这是给管理员的一条信息">开始向管理员发送消息</a>
            <a href="/sendMessageToUser?message=这是给普通用户的一条信息">开始向用户发送消息</a>
+           <span style="color: red" id="prompt"></span>
         <a href="/logout" style="font-size: 1.4em">退出</a>
     </div>
     <div class="main_wrapper">
@@ -102,6 +103,19 @@
                           <%--  <c:if test="${opertation:operationTest('/employee/addEmployee?flag=1', sessionScope.get(HrmConstants.USER_OPERATION_SESSION))}">
                                 <a href="/employee/addEmployee?flag=1">添加员工</a>
                             </c:if>--%>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="menu">
+                <li><a href="javascript:void(0)">消息管理</a></li>
+                <li>
+                    <ul class="sub_menu">
+                        <li><a href="/employee/selectEmployee">已读消息</a></li>
+                        <li>
+                            <security:authorize url="/message/unreadMessage">
+                                <a href="/message/unreadMessage">未读消息</a>
+                            </security:authorize>
                         </li>
                     </ul>
                 </li>

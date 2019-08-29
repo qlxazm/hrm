@@ -4,6 +4,7 @@ import org.java.hrm.dao.*;
 import org.java.hrm.domain.*;
 import org.java.hrm.myException.AddUserException;
 import org.java.hrm.myException.SelectRoleException;
+import org.java.hrm.params.UserMessagesParam;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -434,4 +435,22 @@ public class HrmServiceImpl implements HrmService {
     public void addMessage(Message message) {
         messageDao.save(message);
     }
+
+    @Override
+    public List<Message> getUnreadMessages(User user) {
+        return messageDao.selectUnreadMessages(user);
+    }
+
+    public Message selectMessageById(Integer id){
+        return messageDao.getMessageById(id);
+    }
+
+    /**
+     * 将消息设置为读取状态
+     * @param params
+     */
+    public void readMessage(UserMessagesParam params){
+        messageDao.readMessage(params);
+    }
+
 }

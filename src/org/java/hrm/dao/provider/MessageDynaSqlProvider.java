@@ -5,8 +5,11 @@ import org.java.hrm.domain.Message;
 import org.java.hrm.domain.User;
 
 import static org.java.hrm.util.common.HrmConstants.MESSAGETABLE;
+import static org.java.hrm.util.common.HrmConstants.USERMESSAGETABLE;
 
 public class MessageDynaSqlProvider {
+
+    private static final String MESSAGE_TYPE_OF_ALL = "all";
 
     /**
      * 新增消息
@@ -33,10 +36,16 @@ public class MessageDynaSqlProvider {
     }
 
     public String selectUnreadMessages(User user) {
-       /* SELECT id, content, source, target, releaseTime FROM `messages` WHERE (target = 'all' OR target = '超级管理员' ) AND id NOT IN (
-                SELECT messageId FROM user_message WHERE username = '超级管理员'
-)*/
+        String sql = new SQL(){
+            {
+                SELECT("id, content, source, target, releaseTime");
+                FROM(MESSAGETABLE);
+                WHERE("target = '" + MESSAGE_TYPE_OF_ALL + "' OR target = #{username}");
+                AND();
+                WHERE("id NOT IN (SELECT messageId FROM " + USERMESSAGETABLE + " WHERE username = #{username})");
 
-        return null;
+            }
+        }.toString();
+        return sql;
     }
 }

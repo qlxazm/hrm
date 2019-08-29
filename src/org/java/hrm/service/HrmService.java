@@ -6,6 +6,7 @@ import org.java.hrm.dao.PermissionDao;
 import org.java.hrm.domain.*;
 import org.java.hrm.myException.AddUserException;
 import org.java.hrm.myException.SelectRoleException;
+import org.java.hrm.params.UserMessagesParam;
 import org.java.hrm.util.tag.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -204,6 +205,25 @@ public interface HrmService {
 
    List<Permission> selectAllPermission();
     /*==========================================   系统消息   ====================================*/
-    void addMessage(Message message);
+   void addMessage(Message message);
 
+    /**
+     * 读取用户的未读消息
+     * @param user
+     * @return
+     */
+   List<Message> getUnreadMessages(User user);
+
+    /**
+     * 根据id查询消息的详细内容
+     * @param id
+     * @return
+     */
+   Message selectMessageById(Integer id);
+
+    /**
+     * 将消息设置为读取状态
+     * @param params
+     */
+   void readMessage(UserMessagesParam params);
 }

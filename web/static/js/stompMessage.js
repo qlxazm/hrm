@@ -9,11 +9,13 @@ $(function () {
         stomp.subscribe("/topic/marco", function (message) {
             var content = message.body;
             // var obj = JSON.parse(content);
+            $("#prompt").empty().text("你收到了一条消息：" + content);
             console.log("订阅的服务端直接返回的消息：" + content);
         }, {});
 
         stomp.subscribe("/user/queue/notification", function (message) {
             var content = message.body;
+            $("#prompt").empty().text("你收到了一条消息：" + content);
             console.log('这是发送给指定用户的消息：' + content)
         })
 
