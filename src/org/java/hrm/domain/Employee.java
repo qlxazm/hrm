@@ -71,7 +71,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return this.name + "---" + this.address + "---部门：" + this.dept_id + "---职位：" + this.job_id;
+        return "id是：" + this.id + "----" + this.name + "---" + this.address + "---部门：" + this.dept_id + "---职位：" + this.job_id;
     }
 
     public Integer getJob_id() {

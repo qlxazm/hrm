@@ -6,6 +6,7 @@ import org.java.hrm.domain.Employee;
 import org.java.hrm.domain.Job;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.tag.PageModel;
+import org.java.hrm.utils.ApiRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -151,9 +152,13 @@ public class EmployeeController {
      * @param employee
      * @param response
      */
+    @ApiRequest
     @RequestMapping(value = "/employee/detailEmployee")
     public void detailEmployee(@RequestBody Employee employee,
                                HttpServletResponse response) throws Exception{
+
+        System.out.println("查询员工具体信息 employee ->" + employee);
+
         response.setContentType("application/json; charset=utf-8");
         employee = hrmService.findEmployeeById(employee.getId());
         ObjectMapper objectMapper = new ObjectMapper();

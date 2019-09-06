@@ -3,6 +3,7 @@ package org.java.hrm.controller;
 import org.java.hrm.domain.Dept;
 import org.java.hrm.service.HrmService;
 import org.java.hrm.util.tag.PageModel;
+import org.java.hrm.utils.ApiRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -28,11 +29,14 @@ public class DeptController {
      * @param model
      * @return
      */
+    @ApiRequest
     @RequestMapping("/dept/selectDept")
     public String selectDept(Integer pageIndex,
                              @ModelAttribute Dept dept,
                              Model model){
-        System.out.println("部门信息查询 -- >> " + dept);
+       /* System.out.println("门部信息查询 pageIndex -- >> " + pageIndex);
+        System.out.println("门部信息查询 dept -- >> " + dept);
+        System.out.println("门部信息查询 model -- >> " + model);*/
 
         PageModel pageModel = new PageModel();
         if (pageIndex != null){

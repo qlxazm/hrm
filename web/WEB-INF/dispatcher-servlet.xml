@@ -4,7 +4,10 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:flow="http://www.springframework.org/schema/webflow-config"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/webflow-config
@@ -50,6 +53,10 @@
             <value>UTF-8</value>
         </property>
     </bean>
+
+    <!--启动AspectJ自动代理，还要将切面声明成bean-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
 
     <!--配置流程执行器-->
     <!--<flow:flow-executor id="flowExecutor"/>-->

@@ -37,5 +37,7 @@
     <orderEntry type="library" name="jackson-annotations-2.9.8" level="project" />
     <orderEntry type="library" name="spring-webflow-2.4.0.RELEASE" level="project" />
     <orderEntry type="library" name="spring-security-remoting-4.2.10.RELEASE-sources" level="project" />
+    <orderEntry type="library" name="solr-analysis-extras-7.5.0" level="project" />
+    <orderEntry type="library" name="commons-io-2.5" level="project" />
   </component>
 </module>
